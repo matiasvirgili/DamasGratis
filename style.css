@@ -1,0 +1,117 @@
+/* Utiles */
+
+body,
+html {
+    /* Establesco el alto y el ancho de toda la pantalla disponible y pongo color de fondo */
+    width: 100vw;
+    height: 100vh;
+    background-color: #BF843B;
+    margin: 0;
+}
+
+
+/* Barra de navegacion */
+
+nav.navegacion {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #400414;
+}
+
+
+/* hacer responsive la navegacion */
+
+nav.navegacion a {
+    font-family: 'Oswald', sans-serif;
+    color: #ffff;
+    font-size: 1.3em;
+    text-decoration: none;
+    transition: all .6s ease;
+    padding: 26px;
+}
+
+nav.navegacion a:hover {
+    background-color: #A63348;
+}
+
+
+/* Tablero */
+
+div.contenedor-tablero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.tablero {
+    margin: 30px 0 30px 0;
+    width: 700px;
+    height: 700px;
+    background-color: #8C4E2A;
+    border-radius: 5px;
+}
+
+
+/* hacer responsivo el tablero */
+
+
+/* Casillas */
+
+div.casilla {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    width: 70px;
+    height: 70px;
+    font-size: 2em;
+}
+
+
+/* hacer responsivo las fichas */
+
+div.clara {
+    background-color: #F2BC57;
+}
+
+div.oscura {
+    background-color: #A63348;
+}
+
+
+/* Damas */
+
+div.dama {
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    background-color: #1D4859;
+    cursor: pointer;
+}
+
+div.blanca {
+    background-color: #5B98A6;
+    cursor: pointer;
+}
+
+
+/* Footer */
+
+.footer {
+    margin: 0;
+}
+
+.contenedor-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #400414;
+    margin: 30px 0 0 0;
+    padding: 30px 0 55px 0;
+}
+
+.copyRight {
+    margin: 0;
+    color: #ffffff;
+}
