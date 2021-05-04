@@ -7,320 +7,230 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi propio juego de damas</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
 </head>
 
 <body>
-
     <header>
         <!--Navegación-->
         <nav class="navegacion">
             <a href="index.html"> DAMAS</a>
-            <a href="reglas.html">¿Cómo jugar?</a>
-            <a href="#">Registrate!</a>
+            <a href="https://es.wikipedia.org/wiki/Damas">¿Cómo jugar?</a>
+            <a href="#">Registro</a>
         </nav>
     </header>
 
-
     <main>
+        <!-- Jugador 1-->
+        <div class="jugador-1">
+            <div class="casilla">
+                <div class="dama-jugador1"> </div>
+            </div>
+            <p>Jugador 1</p>
+            <p>Puntos:</p>
+        </div>
         <!--Tablero-->
-        <div class="contenedor-tablero">
-            <div class="tablero">
-                <div class="fila-letra">
-                    <div class="casilla letra"></div>
-                    <div class="casilla letra">a</div>
-                    <div class="casilla letra">b</div>
-                    <div class="casilla letra">c</div>
-                    <div class="casilla letra">d</div>
-                    <div class="casilla letra">e</div>
-                    <div class="casilla letra">f</div>
-                    <div class="casilla letra">g</div>
-                    <div class="casilla letra">h</div>
-                    <div class="casilla letra"></div>
+        <div class="tablero">
+            <div class="fila-letras fila">
+                <div class="casilla letra"></div>
+                <div class="casilla letra">a</div>
+                <div class="casilla letra">b</div>
+                <div class="casilla letra">c</div>
+                <div class="casilla letra">d</div>
+                <div class="casilla letra">e</div>
+                <div class="casilla letra">f</div>
+                <div class="casilla letra">g</div>
+                <div class="casilla letra">h</div>
+                <div class="casilla letra"></div>
+            </div>
+            <div class="fila-8  fila">
+                <div class="casilla"> 8 </div>
+                <div id="a8" class="casilla clara"> </div>
+                <div id="b8" class="casilla oscura">
+                    <div id="dama1negra" class="dama"></div>
                 </div>
-                <div class="fila-8">
-                    <div class="casilla">
-                        <div>8</div>
-                    </div>
-                    <div id="a8" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="b8" class="casilla oscura">
-                        <div id="dama1negra" class="dama"></div>
-                    </div>
-                    <div id="c8" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="d8" class="casilla oscura">
-                        <div id="dama2negra" class="dama"></div>
-                    </div>
-                    <div id="e8" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="f8" class="casilla oscura">
-                        <div id="dama3negra" class="dama"></div>
-                    </div>
-                    <div id="g8" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="h8" class="casilla oscura">
-                        <div id="dama4negra" class="dama"></div>
-                    </div>
-                    <div class="casilla">
-                        <div>8</div>
-                    </div>
+                <div id="c8" class="casilla clara"> </div>
+                <div id="d8" class="casilla oscura">
+                    <div id="dama2negra" class="dama"></div>
                 </div>
-                <div class="fila-7">
-                    <div class="casilla">
-                        <div>7</div>
-                    </div>
-                    <div id="a7" class="casilla oscura">
-                        <div id="dama5negra" class="dama"></div>
-                    </div>
-                    <div id="b7" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="c7" class="casilla oscura">
-                        <div id="dama6negra" class="dama"></div>
-                    </div>
-                    <div id="d7" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="e7" class="casilla oscura">
-                        <div id="dama7negra" class="dama"></div>
-                    </div>
-                    <div id="f7" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="g7" class="casilla oscura">
-                        <div id="dama8negra" class="dama"></div>
-                    </div>
-                    <div id="h7" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div class="casilla">
-                        <div>7</div>
-                    </div>
+                <div id="e8" class="casilla clara"> </div>
+                <div id="f8" class="casilla oscura">
+                    <div id="dama3negra" class="dama"></div>
                 </div>
-                <div class="fila-6">
-                    <div class="casilla">
-                        <div>6</div>
-                    </div>
-                    <div id="a6" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="b6" class="casilla oscura">
-                        <div id="dama9negra" class="dama"></div>
-                    </div>
-                    <div id="c6" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="d6" class="casilla oscura">
-                        <div id="dama10negra" class="dama"></div>
-                    </div>
-                    <div id="e6" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="e6" class="casilla oscura">
-                        <div id="dama11negra" class="dama"></div>
-                    </div>
-                    <div id="f6" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="g6" class="casilla oscura">
-                        <div id="dama12negra" class="dama"></div>
-                    </div>
-                    <div class="casilla">
-                        <div>6</div>
-                    </div>
+                <div id="g8" class="casilla clara"> </div>
+                <div id="h8" class="casilla oscura">
+                    <div id="dama4negra" class="dama"></div>
                 </div>
-                <div class="fila-5">
-                    <div class="casilla">
-                        <div>5</div>
-                    </div>
-                    <div id="a5" class="casilla oscura">
-                        <div></div>
-                    </div>
-                    <div id="b5" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="c5" class="casilla oscura">
-                        <div></div>
-                    </div>
-                    <div id="d5" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="e5" class="casilla oscura">
-                        <div></div>
-                    </div>
-                    <div id="f5" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="g5" class="casilla oscura">
-                        <div></div>
-                    </div>
-                    <div id="h5" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div class="casilla">
-                        <div>5</div>
-                    </div>
+                <div class="casilla"> 8 </div>
+
+
+            </div>
+            <div class="fila-7 fila">
+                <div class="casilla"> 7 </div>
+                <div id="a7" class="casilla oscura">
+                    <div id="dama5negra" class="dama"></div>
                 </div>
-                <div class="fila-4">
-                    <div class="casilla">
-                        <div>4</div>
-                    </div>
-                    <div id="a4" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="b4" class="casilla oscura">
-                        <div></div>
-                    </div>
-                    <div id="c4" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="d4" class="casilla oscura">
-                        <div></div>
-                    </div>
-                    <div id="e4" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="f4" class="casilla oscura">
-                        <div></div>
-                    </div>
-                    <div id="g4" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="h4" class="casilla oscura">
-                        <div></div>
-                    </div>
-                    <div class="casilla">
-                        <div>4</div>
-                    </div>
+                <div id="b7" class="casilla clara"> </div>
+                <div id="c7" class="casilla oscura">
+                    <div id="dama6negra" class="dama"></div>
                 </div>
-                <div class="fila-3">
-                    <div class="casilla">
-                        <div>3</div>
-                    </div>
-                    <div id="a3" class="casilla oscura">
-                        <div id="dama12blanca" class="dama blanca"></div>
-                    </div>
-                    <div id="b3" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="c3" class="casilla oscura">
-                        <div id="dama11blanca" class="dama blanca"></div>
-                    </div>
-                    <div id="d3" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="e3" class="casilla oscura">
-                        <div id="dama10blanca" class="dama blanca"></div>
-                    </div>
-                    <div id="f3" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="g3" class="casilla oscura">
-                        <div id="dama9blanca" class="dama blanca"></div>
-                    </div>
-                    <div id="h3" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div class="casilla">
-                        <div>3</div>
-                    </div>
+                <div id="d7" class="casilla clara"> </div>
+                <div id="e7" class="casilla oscura">
+                    <div id="dama7negra" class="dama"></div>
                 </div>
-                <div class="fila-2">
-                    <div class="casilla">
-                        <div>2</div>
-                    </div>
-                    <div id="a2" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="b2" class="casilla oscura">
-                        <div id="dama8blanca" class="dama blanca"></div>
-                    </div>
-                    <div id="c2" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="d2" class="casilla oscura">
-                        <div id="dama7blanca" class="dama blanca"></div>
-                    </div>
-                    <div id="e2" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="f2" class="casilla oscura">
-                        <div id="dama6blanca" class="dama blanca"></div>
-                    </div>
-                    <div id="g2" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="h2" class="casilla oscura">
-                        <div id="dama5blanca" class="dama blanca"></div>
-                    </div>
-                    <div class="casilla">
-                        <div>2</div>
-                    </div>
+                <div id="f7" class="casilla clara"> </div>
+                <div id="g7" class="casilla oscura">
+                    <div id="dama8negra" class="dama"></div>
                 </div>
-                <div class="fila-1">
-                    <div class="casilla">
-                        <div>1</div>
-                    </div>
-                    <div id="a1" class="casilla oscura">
-                        <div id="dama4blanca" class="dama blanca"></div>
-                    </div>
-                    <div id="b1" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="c1" class="casilla oscura">
-                        <div id="dama3blanca" class="dama blanca"></div>
-                    </div>
-                    <div id="d1" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="e1" class="casilla oscura">
-                        <div id="dama2blanca" class="dama blanca"></div>
-                    </div>
-                    <div id="f1" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div id="g1" class="casilla oscura">
-                        <div id="dama1blanca" class="dama blanca"></div>
-                    </div>
-                    <div id="h1" class="casilla clara">
-                        <div></div>
-                    </div>
-                    <div class="casilla">
-                        <div>1</div>
-                    </div>
+                <div id="h7" class="casilla clara">
                 </div>
-                <div class="fila-letra">
-                    <div class="casilla letra"></div>
-                    <div class="casilla letra">a</div>
-                    <div class="casilla letra">b</div>
-                    <div class="casilla letra">c</div>
-                    <div class="casilla letra">d</div>
-                    <div class="casilla letra">e</div>
-                    <div class="casilla letra">f</div>
-                    <div class="casilla letra">g</div>
-                    <div class="casilla letra">h</div>
-                    <div class="casilla letra"></div>
+                <div class="casilla"> 7 </div>
+            </div>
+            <div class="fila-6 fila">
+                <div class="casilla"> 6 </div>
+                <div id="a6" class="casilla clara"> </div>
+                <div id="b6" class="casilla oscura">
+                    <div id="dama9negra" class="dama"></div>
                 </div>
+                <div id="c6" class="casilla clara"> </div>
+                <div id="d6" class="casilla oscura">
+                    <div id="dama10negra" class="dama"></div>
+                </div>
+                <div id="e6" class="casilla clara"> </div>
+                <div id="e6" class="casilla oscura">
+                    <div id="dama11negra" class="dama"></div>
+                </div>
+                <div id="f6" class="casilla clara"> </div>
+                <div id="g6" class="casilla oscura">
+                    <div id="dama12negra" class="dama"></div>
+                </div>
+                <div class="casilla"> 6 </div>
+            </div>
+            <div class="fila-5 fila">
+                <div class="casilla"> 5 </div>
+                <div id="a5" class="casilla oscura">
+                </div>
+                <div id="b5" class="casilla clara">
+                </div>
+                <div id="c5" class="casilla oscura">
+                </div>
+                <div id="d5" class="casilla clara">
+                </div>
+                <div id="e5" class="casilla oscura">
+                </div>
+                <div id="f5" class="casilla clara">
+                </div>
+                <div id="g5" class="casilla oscura">
+                </div>
+                <div id="h5" class="casilla clara">
+                </div>
+                <div class="casilla"> 5 </div>
+            </div>
+            <div class="fila-4 fila">
+                <div class="casilla"> 4 </div>
+                <div id="a4" class="casilla clara"> </div>
+                <div id="b4" class="casilla oscura"> </div>
+                <div id="c4" class="casilla clara"> </div>
+                <div id="d4" class="casilla oscura"> </div>
+                <div id="e4" class="casilla clara"> </div>
+                <div id="f4" class="casilla oscura"> </div>
+                <div id="g4" class="casilla clara"> </div>
+                <div id="h4" class="casilla oscura"> </div>
+                <div class="casilla"> 4 </div>
+            </div>
+            <div class="fila-3 fila">
+                <div class="casilla"> 3 </div>
+                <div id="a3" class="casilla oscura">
+                    <div id="dama12blanca" class="dama blanca"></div>
+                </div>
+                <div id="b3" class="casilla clara"> </div>
+                <div id="c3" class="casilla oscura">
+                    <div id="dama11blanca" class="dama blanca"></div>
+                </div>
+                <div id="d3" class="casilla clara"> </div>
+                <div id="e3" class="casilla oscura">
+                    <div id="dama10blanca" class="dama blanca"></div>
+                </div>
+                <div id="f3" class="casilla clara"> </div>
+                <div id="g3" class="casilla oscura">
+                    <div id="dama9blanca" class="dama blanca"></div>
+                </div>
+                <div id="h3" class="casilla clara"> </div>
+                <div class="casilla"> 3 </div>
+            </div>
+            <div class="fila-2 fila">
+                <div class="casilla"> 2 </div>
+                <div id="a2" class="casilla clara"> </div>
+                <div id="b2" class="casilla oscura">
+                    <div id="dama8blanca" class="dama blanca"></div>
+                </div>
+                <div id="c2" class="casilla clara"> </div>
+                <div id="d2" class="casilla oscura">
+                    <div id="dama7blanca" class="dama blanca"></div>
+                </div>
+                <div id="e2" class="casilla clara"> </div>
+                <div id="f2" class="casilla oscura">
+                    <div id="dama6blanca" class="dama blanca"></div>
+                </div>
+                <div id="g2" class="casilla clara"> </div>
+                <div id="h2" class="casilla oscura">
+                    <div id="dama5blanca" class="dama blanca"></div>
+                </div>
+                <div class="casilla"> 2 </div>
+            </div>
+            <div class="fila-1 fila">
+                <div class="casilla"> 1 </div>
+                <div id="a1" class="casilla oscura">
+                    <div id="dama4blanca" class="dama blanca"></div>
+                </div>
+                <div id="b1" class="casilla clara"> </div>
+                <div id="c1" class="casilla oscura">
+                    <div id="dama3blanca" class="dama blanca"></div>
+                </div>
+                <div id="d1" class="casilla clara"> </div>
+                <div id="e1" class="casilla oscura">
+                    <div id="dama2blanca" class="dama blanca"></div>
+                </div>
+                <div id="f1" class="casilla clara"> </div>
+                <div id="g1" class="casilla oscura">
+                    <div id="dama1blanca" class="dama blanca"></div>
+                </div>
+                <div id="h1" class="casilla clara"> </div>
+                <div class="casilla"> 1 </div>
+            </div>
+            <div class="fila-letra fila">
+                <div class="casilla letra"></div>
+                <div class="casilla letra">a</div>
+                <div class="casilla letra">b</div>
+                <div class="casilla letra">c</div>
+                <div class="casilla letra">d</div>
+                <div class="casilla letra">e</div>
+                <div class="casilla letra">f</div>
+                <div class="casilla letra">g</div>
+                <div class="casilla letra">h</div>
+                <div class="casilla letra"></div>
             </div>
         </div>
+        <!-- Jugador 2-->
+        <div class="jugador-2">
+            <div class="casilla">
+                <div class="dama-jugador2"> </div>
+            </div>
+            <p>Jugador 2</p>
+            <p>Puntos:</p>
+        </div>
     </main>
-
+    <div class="boton">
+        <input type="button" class="button" value="Iniciar juego">
+    </div>
 
     <footer>
         <!--Pie de pagina-->
         <div class="contenedor-footer">
-            <p class="enlaces"> Autor: Virgili Matias</p>
-            <a class="enlaces" href="reglas.html">¿Cómo jugar?</a>
-            <a class="enlaces" href="#">Registrate!</a>
-            <p class="copyRight">Todos los Derechos Reservados 2021 &copy;</p>
+            <p class="pie-descripcion"> Autor: Virgili Matias, 2021</p>
+            <p class="pie-descripcion">Contacto: matiasvirgili@gmail.com</p>
         </div>
     </footer>
-
-
 </body>
 
 </html>
