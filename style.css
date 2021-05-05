@@ -2,7 +2,7 @@
 
 h1 {
     font-family: 'Oswald', sans-serif;
-    color: #ffff;
+    color: #CEECF2;
     font-size: 1.3em;
     margin-left: 20px;
 }
@@ -13,7 +13,7 @@ body {
     justify-content: space-between;
     max-width: 100vw;
     min-height: 100vh;
-    background-color: #BFAE99;
+    background-color: #CEECF2;
     margin: 0;
 }
 
@@ -30,7 +30,7 @@ nav.navegacion {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #111C26;
+    background-color: #035E73;
 }
 
 @media (max-width: 768px) {
@@ -46,11 +46,11 @@ nav.navegacion a {
     font-size: 1.3em;
     text-decoration: none;
     transition: all .6s ease;
-    padding: 25px;
+    padding: 19px;
 }
 
 nav.navegacion a:hover {
-    background-color: #BFAE99;
+    background-color: #BF9E75;
 }
 
 
@@ -60,7 +60,7 @@ div.tablero {
     display: flex;
     flex-direction: column;
     margin: 30px 0 10px 0;
-    background-color: #111C26;
+    background-color: #035E73;
     border-radius: 5px;
 }
 
@@ -75,15 +75,16 @@ div.jugador-1 {
     margin-right: 2vw;
     border-radius: 5px;
     padding: 1vw;
-    background-color: #D9B589;
+    background-color: #46B5B6;
+    box-shadow: 0 0 5px red;
 }
 
 .dama-jugador1 {
     width: 70%;
     height: 70%;
     border-radius: 50%;
-    background-color: #BFAE99;
-    box-shadow: 0 0 7px #59462E;
+    background-color: #B6465F;
+    box-shadow: 0 0 7px red;
 }
 
 div.jugador-2 {
@@ -94,20 +95,21 @@ div.jugador-2 {
     margin-left: 2vw;
     padding: 1vw;
     border-radius: 5px;
-    background-color: #D9B589;
+    background-color: #46B5B6;
+    box-shadow: 0 0 5px red;
 }
 
 .dama-jugador2 {
     width: 70%;
     height: 70%;
     border-radius: 50%;
-    background-color: #59462E;
-    box-shadow: 0 0 7px #C1CED9;
+    background-color: #BED8D4;
+    box-shadow: 0 0 7px white;
 }
 
 .jugador-1 p,
 .jugador-2 p {
-    color: #111C26;
+    color: #CEECF2;
     font-family: 'Oswald', sans-serif;
     margin: .3vw;
 }
@@ -120,6 +122,7 @@ div.jugador-2 {
     }
     div.jugador-2 {
         margin-left: 0vw;
+        margin-top: 2vh;
     }
     div.jugador-1 {
         margin-right: 0vw;
@@ -138,22 +141,21 @@ div.boton {
 }
 
 .button {
-    background-color: #00aae4;
+    background-color: #BF9E75;
     padding: 1vw 4vw;
     color: #ffffff;
     font-family: 'Oswald', sans-serif;
     text-decoration: none;
     font-size: 1.2em;
     transition: all .3s ease;
-    border: 2.5px solid #00aae4;
+    border: 2.5px solid #BF9E75;
     border-radius: 5px;
-    box-shadow: 0 0 7px blue;
+    box-shadow: 0 0 9px #D9B589;
     cursor: pointer;
 }
 
 .button:hover {
-    background-color: #2271b3;
-    border: 2.5px solid #2271b3;
+    background-color: #035E73;
 }
 
 
@@ -171,7 +173,7 @@ div.casilla {
     width: 4vw;
     height: 4vw;
     font-size: 1.5em;
-    color: #D9BC9A;
+    color: #BF9E75;
 }
 
 @media (max-width: 768px) {
@@ -182,15 +184,15 @@ div.casilla {
 }
 
 div.letra {
-    color: #D9BC9A;
+    color: #BF9E75;
 }
 
 div.clara {
-    background-color: #D9BC9A;
+    background-color: #03A696;
 }
 
 div.oscura {
-    background-color: #8C5637;
+    background-color: #F27052;
 }
 
 
@@ -200,14 +202,14 @@ div.dama {
     width: 70%;
     height: 70%;
     border-radius: 50%;
-    background-color: #59462E;
-    box-shadow: 0 0 7px #D9BC9A;
+    background-color: #B6465F;
+    box-shadow: 0 0 7px red;
     cursor: pointer;
 }
 
 div.blanca {
-    background-color: #BFAE99;
-    box-shadow: 0 0 7px #59462E;
+    background-color: #BED8D4;
+    box-shadow: 0 0 7px white;
     cursor: pointer;
 }
 
@@ -222,7 +224,7 @@ div.contenedor-footer {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: #111C26;
+    background-color: #035E73;
     margin: 30px 0 0 0;
     padding: 30px 0 30px 0;
     overflow: hidden;
