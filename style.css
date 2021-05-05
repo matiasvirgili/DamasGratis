@@ -1,5 +1,12 @@
 /* Utiles */
 
+h1 {
+    font-family: 'Oswald', sans-serif;
+    color: #ffff;
+    font-size: 1.3em;
+    margin-left: 20px;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -22,13 +29,14 @@ main {
 nav.navegacion {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     background-color: #111C26;
 }
 
 @media (max-width: 768px) {
     nav.navegacion {
         flex-direction: column;
+        padding-bottom: 15px;
     }
 }
 
@@ -65,7 +73,6 @@ div.jugador-1 {
     justify-content: center;
     align-items: center;
     margin-right: 2vw;
-    border: 2px solid #111C26;
     border-radius: 5px;
     padding: 1vw;
     background-color: #D9B589;
@@ -85,7 +92,6 @@ div.jugador-2 {
     justify-content: center;
     align-items: center;
     margin-left: 2vw;
-    border: 2px solid #111C26;
     padding: 1vw;
     border-radius: 5px;
     background-color: #D9B589;
@@ -104,6 +110,21 @@ div.jugador-2 {
     color: #111C26;
     font-family: 'Oswald', sans-serif;
     margin: .3vw;
+}
+
+@media (max-width:768px) {
+    main {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    div.jugador-2 {
+        margin-left: 0vw;
+    }
+    div.jugador-1 {
+        margin-right: 0vw;
+        margin-top: 2vh;
+    }
 }
 
 
@@ -151,6 +172,13 @@ div.casilla {
     height: 4vw;
     font-size: 1.5em;
     color: #D9BC9A;
+}
+
+@media (max-width: 768px) {
+    div.casilla {
+        width: 7vw;
+        height: 7vw;
+    }
 }
 
 div.letra {

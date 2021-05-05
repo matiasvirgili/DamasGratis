@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi propio juego de damas</title>
+    <title>Damas Gratis</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
 </head>
@@ -14,9 +14,11 @@
     <header>
         <!--Navegación-->
         <nav class="navegacion">
-            <a href="index.html"> DAMAS</a>
-            <a href="https://es.wikipedia.org/wiki/Damas">¿Cómo jugar?</a>
-            <a href="#">Registro</a>
+            <h1>DAMAS GRATIS</h1>
+            <div class="registro-login">
+                <a href="#"> Iniciar sesión</a>
+                <a href="#">Registro</a>
+            </div>
         </nav>
     </header>
 
@@ -28,7 +30,7 @@
             </div>
             <p>Jugador 1</p>
             <p>Puntos:</p>
-            <p class="puntos">0</p>
+            <p id="puntos-jugador1" class="puntos">0</p>
         </div>
         <!--Tablero-->
         <div class="tablero">
@@ -220,7 +222,7 @@
             </div>
             <p>Jugador 2</p>
             <p>Puntos:</p>
-            <p class="puntos">0</p>
+            <p id="puntos-jugador2" class="puntos">0</p>
         </div>
     </main>
     <div class="boton">
@@ -231,7 +233,7 @@
         <!--Pie de pagina-->
         <div class="contenedor-footer">
             <p class="pie-descripcion"> Autor: Virgili Matias, 2021</p>
-            <p class="pie-descripcion">Contacto: matiasvirgili@gmail.com</p>
+            <a href="https://es.wikipedia.org/wiki/Damas">¿Cómo jugar?</a>
         </div>
     </footer>
 </body>
