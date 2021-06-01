@@ -96,7 +96,7 @@ div.jugador-2 {
     padding: 1vw;
     border-radius: 5px;
     background-color: #46B5B6;
-    box-shadow: 0 0 5px red;
+    box-shadow: none;
 }
 
 .dama-jugador2 {
@@ -198,7 +198,7 @@ div.oscura {
 
 /* Damas */
 
-div.dama {
+div.roja {
     width: 70%;
     height: 70%;
     border-radius: 50%;
@@ -208,6 +208,9 @@ div.dama {
 }
 
 div.blanca {
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
     background-color: #BED8D4;
     box-shadow: 0 0 7px white;
     cursor: pointer;
