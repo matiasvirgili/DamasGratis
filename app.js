@@ -109,7 +109,7 @@ var damaRoja = document.getElementsByClassName('roja');
             if (contador === 0) {
             
                 jugador2.style.boxShadow = 'none';
-                jugador1.style.boxShadow = '0 0 5px red'
+                jugador1.style.boxShadow = '0 0 7px red'
                 contador++;
             }
             
@@ -123,7 +123,7 @@ var damaRoja = document.getElementsByClassName('roja');
             if (contador === 1) {
             
                 jugador1.style.boxShadow = 'none';
-                jugador2.style.boxShadow = '0 0 5px red'
+                jugador2.style.boxShadow = '0 0 7px red'
                 contador--;
             }
             
