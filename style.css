@@ -6,7 +6,7 @@
 
 h1 {
 	font-family: "Oswald", sans-serif;
-	color: #ceecf2;
+	color: #ffff;
 	font-size: 1.3em;
 	margin-left: 20px;
 }
@@ -33,7 +33,7 @@ nav.navegacion {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	background-color: #035e73;
+	background-color: #0B3954  ;
 }
 
 @media (max-width: 768px) {
@@ -69,49 +69,22 @@ div.tablero {
 
 /* Jugadores */
 
-div.jugador-1 {
+div.contenedorJugadores {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-right: 2vw;
+	margin:0 2vw 0 2vw;
 	border-radius: 5px;
 	padding: 1vw;
-	background-color: #46b5b6;
-	box-shadow: 0 0 7px red;
+	background-color:#0B3954;
+	box-shadow: 0 0 15px #B2945B;
 }
 
-.dama-jugador1 {
-	width: 70%;
-	height: 70%;
-	border-radius: 50%;
-	background-color: #b6465f;
-	box-shadow: 0 0 7px red;
-}
 
-div.jugador-2 {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	margin-left: 2vw;
-	padding: 1vw;
-	border-radius: 5px;
-	background-color: #46b5b6;
-	box-shadow: none;
-}
-
-.dama-jugador2 {
-	width: 70%;
-	height: 70%;
-	border-radius: 50%;
-	background-color: #bed8d4;
-	box-shadow: 0 0 7px white;
-}
-
-.jugador-1 p,
-.jugador-2 p {
-	color: #ceecf2;
+.contenedorJugadores p,
+.contenedorJugadores p {
+	color: #ffffff;
 	font-family: "Oswald", sans-serif;
 	margin: 0.3vw;
 }
@@ -122,14 +95,11 @@ div.jugador-2 {
 		justify-content: center;
 		align-items: center;
 	}
-	div.jugador-2 {
+	div.contenedorJugadores {
 		margin-left: 0vw;
 		margin-top: 2vh;
 	}
-	div.jugador-1 {
-		margin-right: 0vw;
-		margin-top: 2vh;
-	}
+	
 }
 
 /* Boton */
@@ -142,21 +112,23 @@ div.boton {
 }
 
 .button {
-	background-color: #bf9e75;
+	background-color: #B33951;
 	padding: 1vw 4vw;
 	color: #ffffff;
 	font-family: "Oswald", sans-serif;
 	text-decoration: none;
 	font-size: 1.2em;
 	transition: all 0.3s ease;
-	border: 2.5px solid #bf9e75;
+	border: 2.5px solid #B33951;
 	border-radius: 5px;
-	box-shadow: 0 0 9px #d9b589;
+	box-shadow: 0 0 9px #B33951;
 	cursor: pointer;
 }
 
 .button:hover {
-	background-color: #035e73;
+	background-color: #0B3954;
+	border-color: #0B3954;
+	box-shadow:0 0 9px #0B3954;
 }
 
 /* Casillas */
@@ -166,53 +138,48 @@ div.fila {
 	flex-direction: row;
 }
 
-div.casilla {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 4vw;
-	height: 4vw;
-	font-size: 1.5em;
-	color: #bf9e75;
+.casillasNegras{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5vw;
+    height: 5vw;
+    background-color:#0B3954  ;
 }
 
-@media (max-width: 768px) {
-	div.casilla {
-		width: 10vw;
-		height: 10vw;
-	}
+.casillasBlancas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5vw;
+    height: 5vw;
+    background-color: #FCFAF9;
 }
 
-div.letra {
-	color: #bf9e75;
+.damasAmarillas{
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    background-color: #B2945B;
+    box-shadow:  0 0 7px #B2945B;
+	border-color:#B2945B ;
+    cursor: pointer;
 }
 
-div.clara {
-	background-color: #03a696;
+.damasVerdes{
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    background-color: #558564;
+    box-shadow: 0 0 7px #558564;
+	border-color:#558564 ;
+    cursor: pointer;
 }
-
-div.oscura {
-	background-color: #f27052;
-}
-
-/* Damas */
-
-div.roja {
-	width: 70%;
-	height: 70%;
-	border-radius: 50%;
-	background-color: #b6465f;
-	box-shadow: 0 0 7px red;
-	cursor: pointer;
-}
-
-div.blanca {
-	width: 70%;
-	height: 70%;
-	border-radius: 50%;
-	background-color: #bed8d4;
-	box-shadow: 0 0 7px white;
-	cursor: pointer;
+@media(max-width: 768px){
+	.casillasNegras, .casillasBlancas{
+        width: 9vw;
+        height: 9vw;
+    }
 }
 
 /* Footer */
@@ -225,7 +192,7 @@ div.contenedor-footer {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	background-color: #035e73;
+	background-color: #0B3954  ;
 	margin: 30px 0 0 0;
 	padding: 30px 0 30px 0;
 	overflow: hidden;
