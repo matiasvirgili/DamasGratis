@@ -105,26 +105,19 @@ function obtenerFichaSeleccionada(ev) {
   fichaSeleccionada.idFila = parseInt(ev.path[1].id.substring(5, 6))
   fichaSeleccionada.idColumna =  parseInt(ev.path[1].id.substring(11, 12))
 
-  // if (ev.path[1].className.contain('esRey')) {
-  //   fichaSeleccionada.esRey = true;
-  // }
-  // esRey()
-  buscarEspaciosDisponibles(
-    fichaSeleccionada.idFila,
-    fichaSeleccionada.idColumna,
-  )
+  buscarEspaciosDisponibles(fichaSeleccionada.idFila, fichaSeleccionada.idColumna)
+
+  if (ev.target.classList.contains('rey')) {
+    fichaSeleccionada.esRey = true;
+  }
 }
 
-// function esRey() {
-//   if (fichaSeleccionada.esRey === false) {
-//     buscarEspaciosDisponibles(
-//       fichaSeleccionada.idFila,
-//       fichaSeleccionada.idColumna,
-//     )
+// logica para es rey
 
-//     // llamar a buscar espacios disponibles buscarEspaciosDisponibles()
-//   }
-// }
+// hacer un for para recorrer el tablero y en el mismo for incrementar en 1 con el i del for el idFila y el idColumna
+// luego verificar que las posiciones del tablero esten en nulas para pintarlas y agregarle el evento onclick
+// luego si se encuentra con una ficha enemiga, validar posible comer 
+// hacer variables booleanas que sea una para mover y otra comerMover para cortar el for
 
 function buscarEspaciosDisponibles(fila, columna) {
 
@@ -138,12 +131,13 @@ function buscarEspaciosDisponibles(fila, columna) {
 
   if (turno === 1) {
     fichaSeleccionada.movFilaPintar = fila + 1
+
   } else {
     fichaSeleccionada.movFilaPintar = fila - 1
+    
   }
 
-  // validar filas 
-  if (fichaSeleccionada.idColumna >= 0 && fichaSeleccionada.idColumna <= 7 && fichaSeleccionada.idFila >= 0 && fichaSeleccionada.idFila <= 7) {
+  if (fichaSeleccionada.movPintarDer <= 7 && fichaSeleccionada.movFilaPintar <= 7 && fichaSeleccionada.movFilaPintar >= 0) {
     
     if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarDer] === null) {
       fichaSeleccionada.movDer = true
@@ -151,14 +145,17 @@ function buscarEspaciosDisponibles(fila, columna) {
       var divPintar = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' +fichaSeleccionada.movPintarDer)
       divPintar.style.backgroundColor = 'red'
     }
-   
+  }
+
+  if (fichaSeleccionada.movPintarIzq >= 0 && fichaSeleccionada.movFilaPintar >= 0  && fichaSeleccionada.movFilaPintar <= 7) {
+    
     if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarIzq] === null) {
       fichaSeleccionada.movIzq = true
       
       var divPintar = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' +fichaSeleccionada.movPintarIzq)
       divPintar.style.backgroundColor = 'red'
-  
     }
+
   }
 
   comprobarComer()
@@ -167,47 +164,59 @@ function buscarEspaciosDisponibles(fila, columna) {
 function comprobarComer() {
   fichaSeleccionada.movComerDerPintado = fichaSeleccionada.movPintarDer + 1
   fichaSeleccionada.movComerIzqPintado = fichaSeleccionada.movPintarIzq - 1
-
-  if (turno === 1) {
-    if (fichaSeleccionada.idColumna >= 0 && fichaSeleccionada.idColumna <= 7 && fichaSeleccionada.idFila >= 0 && fichaSeleccionada.idFila <= 7) { 
+ 
+    if (turno === 1) {
+      
       fichaSeleccionada.movFilaComerPintado = fichaSeleccionada.movFilaPintar + 1
-      if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarDer] === 2 && tableroArray[fichaSeleccionada.movFilaComerPintado][fichaSeleccionada.movComerDerPintado] === null) {
 
-        fichaSeleccionada.movComerDer = true
+      if (fichaSeleccionada.movComerDerPintado <= 7 && fichaSeleccionada.movFilaComerPintado <= 7) {
         
-        var divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' +fichaSeleccionada.movComerDerPintado)
-        divPintar.style.backgroundColor = 'red'
-      }
-      if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarIzq] === 2 && tableroArray[fichaSeleccionada.movFilaComerPintado][fichaSeleccionada.movComerIzqPintado] === null) {
+        if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarDer] === 2 && tableroArray[fichaSeleccionada.movFilaComerPintado][fichaSeleccionada.movComerDerPintado] === null) {
 
-        fichaSeleccionada.movComerIzq = true
-        
-        var divPintar = document.getElementById('fila-' +  fichaSeleccionada.movFilaComerPintado +'-col-' +fichaSeleccionada.movComerIzqPintado)
-        divPintar.style.backgroundColor = 'red'
+          fichaSeleccionada.movComerDer = true
+          
+          var divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' +fichaSeleccionada.movComerDerPintado)
+          divPintar.style.backgroundColor = 'red'
+        }
       }
-    }  
+      if (fichaSeleccionada.movComerIzqPintado >= 0 && fichaSeleccionada.movFilaComerPintado <= 7) {
+        
+        if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarIzq] === 2 && tableroArray[fichaSeleccionada.movFilaComerPintado][fichaSeleccionada.movComerIzqPintado] === null) {
+
+          fichaSeleccionada.movComerIzq = true
+          
+          var divPintar = document.getElementById('fila-' +  fichaSeleccionada.movFilaComerPintado +'-col-' +fichaSeleccionada.movComerIzqPintado)
+          divPintar.style.backgroundColor = 'red'
+        }
+      }
+      
     
-  } else {
-    if (fichaSeleccionada.idColumna >= 0 && fichaSeleccionada.idColumna <= 7 && fichaSeleccionada.idFila >= 0 && fichaSeleccionada.idFila <= 7)  {
-      fichaSeleccionada.movFilaComerPintado = fichaSeleccionada.movFilaPintar - 1
+    } else {
+    
+        fichaSeleccionada.movFilaComerPintado = fichaSeleccionada.movFilaPintar - 1
+        if (fichaSeleccionada.movComerDerPintado <= 7 && fichaSeleccionada.movFilaComerPintado >= 0) {
+          
+          if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarDer] === 1 && tableroArray[fichaSeleccionada.movFilaComerPintado][fichaSeleccionada.movComerDerPintado] === null) {
 
-      if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarDer] === 1 && tableroArray[fichaSeleccionada.movFilaComerPintado][fichaSeleccionada.movComerDerPintado] === null) {
+            fichaSeleccionada.movComerDer = true
+            
+            var divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' +fichaSeleccionada.movComerDerPintado)
+            divPintar.style.backgroundColor = 'red'
+          }
+        }
+        if (fichaSeleccionada.movComerIzqPintado >= 0  && fichaSeleccionada.movFilaComerPintado >= 0) {
+          
+          if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarIzq] === 1 && tableroArray[fichaSeleccionada.movFilaComerPintado][fichaSeleccionada.movComerIzqPintado] === null) {
 
-        fichaSeleccionada.movComerDer = true
-        
-        var divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' +fichaSeleccionada.movComerDerPintado)
-        divPintar.style.backgroundColor = 'red'
+            fichaSeleccionada.movComerIzq = true
+            
+            var divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' + fichaSeleccionada.movComerIzqPintado)
+            divPintar.style.backgroundColor = 'red'
+          }
+        }
       }
-      if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarIzq] === 1 && tableroArray[fichaSeleccionada.movFilaComerPintado][fichaSeleccionada.movComerIzqPintado] === null) {
-
-        fichaSeleccionada.movComerIzq = true
-        
-        var divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' + fichaSeleccionada.movComerIzqPintado)
-        divPintar.style.backgroundColor = 'red'
-      }
-    } 
-  }
-  agregarClickPosiblesMov()
+  
+    agregarClickPosiblesMov()
 }
 
 
@@ -340,6 +349,15 @@ function moverFicha(filaMover, columnaMover, tipoComer) {
   if (fichaSeleccionada.movComerIzq) {
     var divPintar = document.getElementById('fila-' + (fichaSeleccionada.movFilaPintar + filaTurno) + '-col-' +fichaSeleccionada.movComerIzqPintado)
     divPintar.style.backgroundColor = '#0B3954'
+  }
+
+  if (filaMover == 0 || filaMover == 7) {
+  
+    if (fichaSeleccionada.esRey === false) {
+      
+      newDama.classList.add('rey')
+    }
+
   }
 
   quitarEventosClickPosibles()
