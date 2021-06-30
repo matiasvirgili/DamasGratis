@@ -24,6 +24,15 @@ var fichaSeleccionada = {
   movFilaComerPintado: null,
 }
 
+// PASAR DATOS AL SERVIDOR
+
+var data = {
+  jugador: null,
+  idFila: null,
+  idColumna: null
+}
+var url = 'https://jsonplaceholder.typicode.com/posts'
+
 // TABLERO
 
 var tableroArray = [
@@ -281,13 +290,15 @@ function EliminarEspaciosPosibles() {
 }
 
 
+
+
 function moverFicha(filaMover, columnaMover, tipoComer) {
 
   //CREACION DE LA NUEVA FICHA
   var divPadre = document.getElementById('fila-' + filaMover +'-col-' + columnaMover)
-
+  
   var newDama = document.createElement('div')
-
+  
   if (turno === 1) {
     newDama.className = 'damasAmarillas'
     tableroArray[filaMover][columnaMover] = 1;
@@ -296,12 +307,12 @@ function moverFicha(filaMover, columnaMover, tipoComer) {
     tableroArray[filaMover][columnaMover] = 2;
   }
   divPadre.appendChild(newDama)
- 
+  
   //ELIMINACION DE LA FICHA ANTIGUA
   var divViejo = document.getElementById('fila-' + fichaSeleccionada.idFila +'-col-' +  fichaSeleccionada.idColumna)
   divViejo.innerHTML = ''
   tableroArray[fichaSeleccionada.idFila][fichaSeleccionada.idColumna] = null;
-
+  
   //ELIMINACION DE LA FICHA DEL USUARIO CONTRARIO SI LO COME
   if (tipoComer == 'izquierda') {
     if (turno === 1) {
@@ -325,7 +336,7 @@ function moverFicha(filaMover, columnaMover, tipoComer) {
       tableroArray[fichaSeleccionada.idFila - 1][fichaSeleccionada.idColumna + 1] = null
     }
   }
-
+  
   //VUELTA A SU COLOR ORIGINAL DE LAS CASILLAS
   var filaTurno = 0
   if (turno == 1) {
@@ -333,7 +344,7 @@ function moverFicha(filaMover, columnaMover, tipoComer) {
   } else{
     filaTurno = -1
   }
-
+  
   if (fichaSeleccionada.movIzq) {
     var divPintar = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' +fichaSeleccionada.movPintarIzq)
     divPintar.style.backgroundColor = '#0B3954'
@@ -350,16 +361,20 @@ function moverFicha(filaMover, columnaMover, tipoComer) {
     var divPintar = document.getElementById('fila-' + (fichaSeleccionada.movFilaPintar + filaTurno) + '-col-' +fichaSeleccionada.movComerIzqPintado)
     divPintar.style.backgroundColor = '#0B3954'
   }
-
-  if (filaMover == 0 || filaMover == 7) {
   
+  if (filaMover == 0 || filaMover == 7) {
+    
     if (fichaSeleccionada.esRey === false) {
       
       newDama.classList.add('rey')
     }
-
+    
   }
-
+  
+  data.jugador = turno.toString();
+  data.idFila = filaMover.toString();
+  data.idColumna = columnaMover.toString();
+  enviarDatosServidor(url, data)
   quitarEventosClickPosibles()
 }
 
@@ -450,4 +465,16 @@ function resetearObjeto() {
     contadorClicks = 0
 }
 
+function enviarDatosServidor(url, objFicha) {
+  fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(data)
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+    })
+    .catch(err => console.log(err))
+    console.log(objFicha);
+}
 agregarEvento()
