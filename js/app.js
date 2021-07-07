@@ -35,17 +35,27 @@ var url = 'https://jsonplaceholder.typicode.com/posts'
 
 // TABLERO
 
-var tableroArray = [
-  [null, 1, null, 1, null, 1, null, 1],
-  [1, null, 1, null, 1, null, 1, null],
-  [null, 1, null, 1, null, 1, null, 1],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  [2, null, 2, null, 2, null, 2, null],
-  [null, 2, null, 2, null, 2, null, 2],
-  [2, null, 2, null, 2, null, 2, null],
-]
+// var tableroArray = [
+//   [null, 1, null, 1, null, 1, null, 1],
+//   [1, null, 1, null, 1, null, 1, null],
+//   [null, 1, null, 1, null, 1, null, 1],
+//   [null, null, null, null, null, null, null, null],
+//   [null, null, null, null, null, null, null, null],
+//   [2, null, 2, null, 2, null, 2, null],
+//   [null, 2, null, 2, null, 2, null, 2],
+//   [2, null, 2, null, 2, null, 2, null],
+// ]
 
+var tableroArray = [
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, 1, null, null, null, null, null, 2],
+  [null, null, null, null, null, null, null, null],
+]
 
 function crearTablero() {
   var tablero = document.getElementById('tablero')
@@ -114,11 +124,23 @@ function obtenerFichaSeleccionada(ev) {
   fichaSeleccionada.idFila = parseInt(ev.path[1].id.substring(5, 6))
   fichaSeleccionada.idColumna =  parseInt(ev.path[1].id.substring(11, 12))
 
-  buscarEspaciosDisponibles(fichaSeleccionada.idFila, fichaSeleccionada.idColumna)
-
   if (ev.target.classList.contains('rey')) {
     fichaSeleccionada.esRey = true;
   }
+ 
+  if (fichaSeleccionada.esRey === false) {
+    buscarEspaciosDisponibles(fichaSeleccionada.idFila, fichaSeleccionada.idColumna, 1, 1)
+  }
+  else{
+    segundoFor = 0
+    for (let a = 1; a < 8; a++) {
+      segundoFor = -a;
+      buscarEspaciosDisponibles(fichaSeleccionada.idFila, fichaSeleccionada.idColumna, a, segundoFor)
+      contadorClicks = 0;
+      buscarEspaciosDisponibles(fichaSeleccionada.idFila, fichaSeleccionada.idColumna, a, a)
+    }
+  }
+
 }
 
 // logica para es rey
@@ -128,26 +150,23 @@ function obtenerFichaSeleccionada(ev) {
 // luego si se encuentra con una ficha enemiga, validar posible comer 
 // hacer variables booleanas que sea una para mover y otra comerMover para cortar el for
 
-function buscarEspaciosDisponibles(fila, columna) {
+function buscarEspaciosDisponibles(fila, columna, aMoverColumna, aMoverFila) {
 
   if (contadorClicks > 0) {
     EliminarEspaciosPosibles()
   }
   contadorClicks++
 
-  fichaSeleccionada.movPintarIzq = columna - 1
-  fichaSeleccionada.movPintarDer = columna + 1
+  fichaSeleccionada.movPintarIzq = columna - aMoverColumna
+  fichaSeleccionada.movPintarDer = columna + aMoverColumna
 
   if (turno === 1) {
-    fichaSeleccionada.movFilaPintar = fila + 1
-
+    fichaSeleccionada.movFilaPintar = fila + aMoverFila
   } else {
-    fichaSeleccionada.movFilaPintar = fila - 1
-    
+    fichaSeleccionada.movFilaPintar = fila - aMoverFila
   }
 
   if (fichaSeleccionada.movPintarDer <= 7 && fichaSeleccionada.movFilaPintar <= 7 && fichaSeleccionada.movFilaPintar >= 0) {
-    
     if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarDer] === null) {
       fichaSeleccionada.movDer = true
   
@@ -155,16 +174,19 @@ function buscarEspaciosDisponibles(fila, columna) {
       divPintar.style.backgroundColor = 'red'
     }
   }
+  else{
+      fichaSeleccionada.movDer = false
+  }
 
   if (fichaSeleccionada.movPintarIzq >= 0 && fichaSeleccionada.movFilaPintar >= 0  && fichaSeleccionada.movFilaPintar <= 7) {
-    
     if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarIzq] === null) {
       fichaSeleccionada.movIzq = true
-      
       var divPintar = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' +fichaSeleccionada.movPintarIzq)
       divPintar.style.backgroundColor = 'red'
     }
-
+  }
+  else{
+      fichaSeleccionada.movIzq = false
   }
 
   comprobarComer()
@@ -188,6 +210,10 @@ function comprobarComer() {
           divPintar.style.backgroundColor = 'red'
         }
       }
+      else{
+        fichaSeleccionada.movComerDer = false
+      }
+
       if (fichaSeleccionada.movComerIzqPintado >= 0 && fichaSeleccionada.movFilaComerPintado <= 7) {
         
         if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarIzq] === 2 && tableroArray[fichaSeleccionada.movFilaComerPintado][fichaSeleccionada.movComerIzqPintado] === null) {
@@ -198,7 +224,9 @@ function comprobarComer() {
           divPintar.style.backgroundColor = 'red'
         }
       }
-      
+       else{
+        fichaSeleccionada.movComerIzq = false
+      }
     
     } else {
     
@@ -213,6 +241,10 @@ function comprobarComer() {
             divPintar.style.backgroundColor = 'red'
           }
         }
+        else{
+        fichaSeleccionada.movComerDer = false
+        }
+
         if (fichaSeleccionada.movComerIzqPintado >= 0  && fichaSeleccionada.movFilaComerPintado >= 0) {
           
           if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarIzq] === 1 && tableroArray[fichaSeleccionada.movFilaComerPintado][fichaSeleccionada.movComerIzqPintado] === null) {
@@ -222,6 +254,9 @@ function comprobarComer() {
             var divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' + fichaSeleccionada.movComerIzqPintado)
             divPintar.style.backgroundColor = 'red'
           }
+        }
+        else{
+        fichaSeleccionada.movComerIzq = false
         }
       }
   
@@ -233,19 +268,19 @@ function comprobarComer() {
     
     if (fichaSeleccionada.movIzq) {
       var divMover = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' + fichaSeleccionada.movPintarIzq)
-      divMover.setAttribute('onClick', 'moverFicha(fichaSeleccionada.movFilaPintar, fichaSeleccionada.movPintarIzq, "")')
+      divMover.setAttribute('onClick', 'moverFicha(' + fichaSeleccionada.movFilaPintar + ',' + fichaSeleccionada.movPintarIzq +', "")')
     }
     if (fichaSeleccionada.movDer) {
-      var divMover = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' + fichaSeleccionada.movPintarDer)
-      divMover.setAttribute('onClick', 'moverFicha(fichaSeleccionada.movFilaPintar, fichaSeleccionada.movPintarDer, "")')
+      var divMover = document.getElementById('fila-' + fichaSeleccionada.movFilaPintar +'-col-' + fichaSeleccionada.movPintarDer)
+      divMover.setAttribute('onClick', 'moverFicha(' + fichaSeleccionada.movFilaPintar + ',' + fichaSeleccionada.movPintarDer + ', "")')
     }
     if (fichaSeleccionada.movComerDer) {
       var divMover = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' + fichaSeleccionada.movComerDerPintado)
-      divMover.setAttribute('onClick', 'moverFicha(fichaSeleccionada.movFilaComerPintado, fichaSeleccionada.movComerDerPintado, "derecha")')
+      divMover.setAttribute('onClick', 'moverFicha(' + fichaSeleccionada.movFilaComerPintado + ',' + fichaSeleccionada.movComerDerPintado + ', "derecha")')
     }
     if (fichaSeleccionada.movComerIzq) {
       var divMover = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' + fichaSeleccionada.movComerIzqPintado)
-      divMover.setAttribute('onClick', 'moverFicha(fichaSeleccionada.movFilaComerPintado, fichaSeleccionada.movComerIzqPintado, "izquierda")')
+      divMover.setAttribute('onClick', 'moverFicha(' + fichaSeleccionada.movFilaComerPintado + ',' + fichaSeleccionada.movComerIzqPintado +', "izquierda")')
     }
   } 
   
@@ -282,15 +317,12 @@ function EliminarEspaciosPosibles() {
       divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' + fichaSeleccionada.movComerIzqPintado)
       divPintar.style.backgroundColor = '#0B3954'
     }
-    
+
 }
   quitarEvento = true
   quitarEventosClickPosibles()
   resetearObjeto()
 }
-
-
-
 
 function moverFicha(filaMover, columnaMover, tipoComer) {
 
@@ -362,6 +394,7 @@ function moverFicha(filaMover, columnaMover, tipoComer) {
     divPintar.style.backgroundColor = '#0B3954'
   }
   
+
   if (filaMover == 0 || filaMover == 7) {
     
     if (fichaSeleccionada.esRey === false) {
@@ -374,7 +407,7 @@ function moverFicha(filaMover, columnaMover, tipoComer) {
   data.jugador = turno.toString();
   data.idFila = filaMover.toString();
   data.idColumna = columnaMover.toString();
-  enviarDatosServidor(url, data)
+  //enviarDatosServidor(url, data)
   quitarEventosClickPosibles()
 }
 
@@ -465,16 +498,16 @@ function resetearObjeto() {
     contadorClicks = 0
 }
 
-function enviarDatosServidor(url, objFicha) {
-  fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(data)
-  })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data)
-    })
-    .catch(err => console.log(err))
-    console.log(objFicha);
-}
+// function enviarDatosServidor(url, objFicha) {
+//   fetch(url, {
+//     method: 'POST',
+//     body: JSON.stringify(data)
+//   })
+//     .then(res => res.json())
+//     .then(data => {
+//       console.log(data)
+//     })
+//     .catch(err => console.log(err))
+//     console.log(objFicha);
+// }
 agregarEvento()

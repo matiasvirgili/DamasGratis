@@ -217,6 +217,11 @@ div.contenedor-footer a {
 	color: #ffffff;
 }
 
+/** Rey **/
+
+.rey{
+	background-image:  url(/img/logoDamaReina.png);
+}
 
 /** Registro **/
 
@@ -246,6 +251,7 @@ div.contenedor-footer a {
 	border: 1px solid #1f53c5;
 	font-family:'calibri';
 	font-size: 1.1rem;
+	color: #ffffff;
 }
 
 .form-registro p a{
