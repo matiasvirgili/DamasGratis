@@ -2,64 +2,69 @@
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Damas Gratis</title>
-		<link rel="stylesheet" href="../css/style.css" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine"/>
-		<script src="../js/app.js" defer></script>
-	</head>
 
-	<body>
-		<header>
-			<!--Navegación-->
-			<nav class="navegacion">
-				<h1>DAMAS GRATIS</h1>
-				<div class="registro-login">
-					<a href="registro.html">Registro</a>
-					<a href="#"> Iniciar sesión</a>
-				</div>
-			</nav>
-		</header>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Damas Gratis</title>
+	<link rel="stylesheet" href="../css/style.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine" />
+	<script src="../js/app.js" defer></script>
+</head>
 
-		<main>
-			<!-- Jugador 1-->
-			<div id="jugador1" class="contenedorJugadores">
-				<div class="casillasNegras">
-					<div class="damasAmarillas"> </div>
-				</div>	
-		
-				<p>Jugador 1</p>
-				<p>Puntos:</p>
-				<p id="puntos-jugador1" class="puntos">0</p>
+<body>
+	<header>
+		<!--Navegación-->
+		<nav class="navegacion">
+			<h1>DAMAS GRATIS</h1>
+			<div class="registro-login">
+				<a href="registro.html">Registro</a>
+				<a href="#"> Iniciar sesión</a>
+			</div>
+		</nav>
+	</header>
+
+	<main>
+		<!-- Jugador 1-->
+		<div id="jugador1" class="contenedorJugadores">
+			<div class="casillasNegras">
+				<div class="damasAmarillas"> </div>
 			</div>
 
-			<!--Tablero-->
-			<div id="tablero" class="tablero"></div>
-
-			<!-- Jugador 2-->
-			<div id="jugador2" class="contenedorJugadores">
-				<div class="casillasNegras">
-					<div class="damasVerdes"> </div>
-				</div>
-			
-				<p>Jugador 2</p>
-				<p>Puntos:</p>
-				<p id="puntos-jugador2" class="puntos">0</p>
-			</div>
-		</main>
-		<div class="boton">
-			<input type="button" class="button" value="Iniciar juego" />
+			<p>Jugador 1</p>
+			<p>Puntos:</p>
+			<p id="puntos-jugador1" class="puntos">0</p>
 		</div>
 
-		<footer>
-			<!--Pie de pagina-->
-			<div class="contenedor-footer">
-				<p class="pie-descripcion"> Autor: Virgili Matias, 2021</p>
-				<a href="https://es.wikipedia.org/wiki/Damas">¿Cómo jugar?</a>
+		<!--Tablero-->
+		<div id="tablero" class="tablero"></div>
+
+		<!-- Jugador 2-->
+		<div id="jugador2" class="contenedorJugadores">
+			<div class="casillasNegras">
+				<div class="damasVerdes"> </div>
 			</div>
-		</footer>
-	</body>
+
+			<p>Jugador 2</p>
+			<p>Puntos:</p>
+			<p id="puntos-jugador2" class="puntos">0</p>
+		</div>
+	</main>
+	<div class="boton">
+		<input type="button" id="guardar" class="button" value="Guardar partida" />
+		<input type="button" class="button" value="Nueva partida" />
+		<input type="button" id="cargar" class="button" value="Cargar partida" />
+
+	</div>
+
+	<footer>
+		<!--Pie de pagina-->
+		<div class="contenedor-footer">
+			<p class="pie-descripcion"> Autor: Virgili Matias, 2021</p>
+			<a href="https://es.wikipedia.org/wiki/Damas">¿Cómo jugar?</a>
+		</div>
+	</footer>
+</body>
+
 </html>

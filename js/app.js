@@ -51,7 +51,7 @@ var tableroArray = [
   [null, null, null, null, null, null, null, null],
   [null, null, null, null, null, null, null, null],
   [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
+  [null, 1, null, null, null, 2, null, null],
   [null, null, null, null, null, null, null, null],
   [null, 1, null, null, null, null, null, 2],
   [null, null, null, null, null, null, null, null],
@@ -84,6 +84,7 @@ function crearTablero() {
       newDivFila.appendChild(newDivCell)
     }
   }
+  crearDamas()
 }
 crearTablero()
 
@@ -96,17 +97,27 @@ function crearDamas() {
         var NewDama = document.createElement('div')
         NewDama.className = 'damasAmarillas'
         DivCelda.appendChild(NewDama)
-      } else {
-        if (tableroArray[i][k] === 2) {
-          var NewDama = document.createElement('div')
-          NewDama.className = 'damasVerdes'
-          DivCelda.appendChild(NewDama)
-        }
+      }  
+      if (tableroArray[i][k] === 2) {
+        var NewDama = document.createElement('div')
+        NewDama.className = 'damasVerdes'
+        DivCelda.appendChild(NewDama)
       }
+      if (tableroArray[i][k] === 11) {
+        var NewDama = document.createElement('div')
+        NewDama.className = 'damasAmarillas rey'
+        DivCelda.appendChild(NewDama)
+      }  
+      if (tableroArray[i][k] === 22) {
+        var NewDama = document.createElement('div')
+        NewDama.className = 'damasVerdes rey'
+        DivCelda.appendChild(NewDama)
+      }
+      
     }
   }
 }
-crearDamas()
+
 
 function agregarEvento() {
   if (turno === 1) {
@@ -132,12 +143,13 @@ function obtenerFichaSeleccionada(ev) {
     buscarEspaciosDisponibles(fichaSeleccionada.idFila, fichaSeleccionada.idColumna, 1, 1)
   }
   else{
-    segundoFor = 0
+    var busquedaInversa = 0
     for (let a = 1; a < 8; a++) {
-      segundoFor = -a;
-      buscarEspaciosDisponibles(fichaSeleccionada.idFila, fichaSeleccionada.idColumna, a, segundoFor)
+      busquedaInversa = -a;
+      buscarEspaciosDisponibles(fichaSeleccionada.idFila, fichaSeleccionada.idColumna, a, busquedaInversa)
       contadorClicks = 0;
       buscarEspaciosDisponibles(fichaSeleccionada.idFila, fichaSeleccionada.idColumna, a, a)
+      contadorClicks = 0;
     }
   }
 
@@ -153,7 +165,7 @@ function obtenerFichaSeleccionada(ev) {
 function buscarEspaciosDisponibles(fila, columna, aMoverColumna, aMoverFila) {
 
   if (contadorClicks > 0) {
-    EliminarEspaciosPosibles()
+    resetearTablero()
   }
   contadorClicks++
 
@@ -284,45 +296,18 @@ function comprobarComer() {
     }
   } 
   
-function EliminarEspaciosPosibles() {
-  if (fichaSeleccionada.movDer) {
-    var divPintar = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' +fichaSeleccionada.movPintarDer)
-    divPintar.style.backgroundColor = '#0B3954'
-  }
-   
-  if (fichaSeleccionada.movIzq) {
-    divPintar = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' +fichaSeleccionada.movPintarIzq)
-    divPintar.style.backgroundColor = '#0B3954' 
-  }
-  
-  if (turno === 1) {
-      fichaSeleccionada.movFilaComerPintado = fichaSeleccionada.movFilaPintar + 1
+function resetearTablero() {
+ 
+  var tablero = document.getElementById('tablero')
 
-    if (fichaSeleccionada.movComerDer) {
-      divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' +fichaSeleccionada.movComerDerPintado)
-      divPintar.style.backgroundColor = '#0B3954'
-    }
-    if (fichaSeleccionada.movComerIzq) {
-          divPintar = document.getElementById('fila-' +  fichaSeleccionada.movFilaComerPintado +'-col-' +fichaSeleccionada.movComerIzqPintado)
-          divPintar.style.backgroundColor = '#0B3954'
-    }
-
-  } else {
-      fichaSeleccionada.movFilaComerPintado = fichaSeleccionada.movFilaPintar - 1
-    if (fichaSeleccionada.movComerDer) {
-      divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' +fichaSeleccionada.movComerDerPintado)
-      divPintar.style.backgroundColor = '#0B3954'
-    }
-    if (fichaSeleccionada.movComerIzq) {
-      divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' + fichaSeleccionada.movComerIzqPintado)
-      divPintar.style.backgroundColor = '#0B3954'
-    }
-
-}
+  tablero.innerHTML = ''
   quitarEvento = true
-  quitarEventosClickPosibles()
+
+  crearTablero()
   resetearObjeto()
 }
+
+
 
 function moverFicha(filaMover, columnaMover, tipoComer) {
 
@@ -333,10 +318,31 @@ function moverFicha(filaMover, columnaMover, tipoComer) {
   
   if (turno === 1) {
     newDama.className = 'damasAmarillas'
-    tableroArray[filaMover][columnaMover] = 1;
+    if (tableroArray[fichaSeleccionada.idFila][fichaSeleccionada.idColumna] === 11) {
+      tableroArray[filaMover][columnaMover] = 11;
+    }else{
+      tableroArray[filaMover][columnaMover] = 1;
+    }
   } else {
     newDama.className = 'damasVerdes'
-    tableroArray[filaMover][columnaMover] = 2;
+     if (tableroArray[fichaSeleccionada.idFila][fichaSeleccionada.idColumna] === 22) {
+      tableroArray[filaMover][columnaMover] = 22;
+    }else{
+      tableroArray[filaMover][columnaMover] = 2;
+    }
+  }
+
+  if (filaMover === 0 || filaMover === 7) {
+
+    if (fichaSeleccionada.esRey === false) {
+      newDama.classList.add('rey')
+      if (turno === 1) {
+        tableroArray[filaMover][columnaMover] = 11;
+      }
+      else{
+      tableroArray[filaMover][columnaMover] = 22;
+      }
+    }
   }
   divPadre.appendChild(newDama)
   
@@ -367,47 +373,13 @@ function moverFicha(filaMover, columnaMover, tipoComer) {
       divEnemigoElimanado.innerHTML = ''
       tableroArray[fichaSeleccionada.idFila - 1][fichaSeleccionada.idColumna + 1] = null
     }
-  }
-  
-  //VUELTA A SU COLOR ORIGINAL DE LAS CASILLAS
-  var filaTurno = 0
-  if (turno == 1) {
-    filaTurno = 1
-  } else{
-    filaTurno = -1
-  }
-  
-  if (fichaSeleccionada.movIzq) {
-    var divPintar = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' +fichaSeleccionada.movPintarIzq)
-    divPintar.style.backgroundColor = '#0B3954'
-  }
-  if (fichaSeleccionada.movDer) {
-    var divPintar = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' +fichaSeleccionada.movPintarDer)
-    divPintar.style.backgroundColor = '#0B3954'
-  }
-  if (fichaSeleccionada.movComerDer) {
-    var divPintar = document.getElementById('fila-' + (fichaSeleccionada.movFilaPintar + filaTurno ) + '-col-' +fichaSeleccionada.movComerDerPintado)
-    divPintar.style.backgroundColor = '#0B3954'
-  }
-  if (fichaSeleccionada.movComerIzq) {
-    var divPintar = document.getElementById('fila-' + (fichaSeleccionada.movFilaPintar + filaTurno) + '-col-' +fichaSeleccionada.movComerIzqPintado)
-    divPintar.style.backgroundColor = '#0B3954'
-  }
-  
 
-  if (filaMover == 0 || filaMover == 7) {
-    
-    if (fichaSeleccionada.esRey === false) {
-      
-      newDama.classList.add('rey')
-    }
-    
   }
+
+
   
-  data.jugador = turno.toString();
-  data.idFila = filaMover.toString();
-  data.idColumna = columnaMover.toString();
-  //enviarDatosServidor(url, data)
+  
+  resetearTablero()
   quitarEventosClickPosibles()
 }
 
@@ -498,16 +470,28 @@ function resetearObjeto() {
     contadorClicks = 0
 }
 
-// function enviarDatosServidor(url, objFicha) {
-//   fetch(url, {
-//     method: 'POST',
-//     body: JSON.stringify(data)
-//   })
-//     .then(res => res.json())
-//     .then(data => {
-//       console.log(data)
-//     })
-//     .catch(err => console.log(err))
-//     console.log(objFicha);
-// }
 agregarEvento()
+
+// localStorage
+
+var botonGuardarPartida = document.getElementById('guardar')
+var botonCargarPartida = document.getElementById('cargar')
+
+botonGuardarPartida.addEventListener('click', guardarPartida)
+botonCargarPartida.addEventListener('click', cargarPartida)
+
+function guardarPartida() {
+  
+    localStorage.setItem('tablero', JSON.stringify(tableroArray))
+    localStorage.setItem('turno', turno)
+}
+
+function cargarPartida() {
+  
+  tableroArray = JSON.parse(localStorage.getItem('tablero'))
+  turno = localStorage.getItem(turno)
+  resetearTablero()
+}
+
+
+

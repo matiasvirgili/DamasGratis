@@ -115,7 +115,7 @@ div.boton {
 
 .button {
 	background-color: #B33951;
-	padding: 1vw 4vw;
+	padding: 1vw 2.5vw;
 	color: #ffffff;
 	font-family: "Oswald", sans-serif;
 	text-decoration: none;
@@ -125,9 +125,21 @@ div.boton {
 	border-radius: 5px;
 	box-shadow: 0 0 9px #B33951;
 	cursor: pointer;
+	margin: 0 10px;
+}
+#guardar{
+	background-color: #bf9e75;
+	border: 2.5px solid #bf9e75;
+	box-shadow: 0 0 9px #bf9e75;
 }
 
 .button:hover {
+	background-color: #0B3954;
+	border-color: #0B3954;
+	box-shadow:0 0 9px #0B3954;
+}
+
+#guardar:hover{
 	background-color: #0B3954;
 	border-color: #0B3954;
 	box-shadow:0 0 9px #0B3954;
