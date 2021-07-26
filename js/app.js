@@ -1,7 +1,6 @@
 // VARIABLES GLOBALES
 
 var quitarEvento = false
-var contadorClicks = 0
 var turno = 1
 var fichasAmarillas = document.getElementsByClassName('damasAmarillas')
 var fichasVerdes = document.getElementsByClassName('damasVerdes')
@@ -22,16 +21,12 @@ var fichaSeleccionada = {
   movComerIzqPintado: null,
   movFilaPintar: null,
   movFilaComerPintado: null,
-}
 
-// PASAR DATOS AL SERVIDOR
-
-var data = {
-  jugador: null,
-  idFila: null,
-  idColumna: null
+  // comerReyArribaDer: false,
+  // comerReyArribaIzq: false,
+  // comerReyAbajoDer: false,
+  // comerReyAbajoIzq: false,
 }
-var url = 'https://jsonplaceholder.typicode.com/posts'
 
 // TABLERO
 
@@ -47,11 +42,11 @@ var url = 'https://jsonplaceholder.typicode.com/posts'
 // ]
 
 var tableroArray = [
+  [null, null, null, null, null, null, null, 1],
+  [null, null, null, null, null, null, 2, null],
   [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  [null, 1, null, null, null, 2, null, null],
+  [null, null, null, null, 2, null, null, null],
+  [null, 1, null, null, null, null, null, null],
   [null, null, null, null, null, null, null, null],
   [null, 1, null, null, null, null, null, 2],
   [null, null, null, null, null, null, null, null],
@@ -116,6 +111,8 @@ function crearDamas() {
       
     }
   }
+  
+  actualizarPuntos()
 }
 
 
@@ -132,13 +129,17 @@ function agregarEvento() {
 }
 
 function obtenerFichaSeleccionada(ev) {
+  resetearTablero()
   fichaSeleccionada.idFila = parseInt(ev.path[1].id.substring(5, 6))
   fichaSeleccionada.idColumna =  parseInt(ev.path[1].id.substring(11, 12))
 
   if (ev.target.classList.contains('rey')) {
     fichaSeleccionada.esRey = true;
   }
- 
+  else{
+    fichaSeleccionada.esRey = false;
+  }
+  
   if (fichaSeleccionada.esRey === false) {
     buscarEspaciosDisponibles(fichaSeleccionada.idFila, fichaSeleccionada.idColumna, 1, 1)
   }
@@ -147,12 +148,10 @@ function obtenerFichaSeleccionada(ev) {
     for (let a = 1; a < 8; a++) {
       busquedaInversa = -a;
       buscarEspaciosDisponibles(fichaSeleccionada.idFila, fichaSeleccionada.idColumna, a, busquedaInversa)
-      contadorClicks = 0;
       buscarEspaciosDisponibles(fichaSeleccionada.idFila, fichaSeleccionada.idColumna, a, a)
-      contadorClicks = 0;
     }
   }
-
+  
 }
 
 // logica para es rey
@@ -163,12 +162,6 @@ function obtenerFichaSeleccionada(ev) {
 // hacer variables booleanas que sea una para mover y otra comerMover para cortar el for
 
 function buscarEspaciosDisponibles(fila, columna, aMoverColumna, aMoverFila) {
-
-  if (contadorClicks > 0) {
-    resetearTablero()
-  }
-  contadorClicks++
-
   fichaSeleccionada.movPintarIzq = columna - aMoverColumna
   fichaSeleccionada.movPintarDer = columna + aMoverColumna
 
@@ -177,63 +170,114 @@ function buscarEspaciosDisponibles(fila, columna, aMoverColumna, aMoverFila) {
   } else {
     fichaSeleccionada.movFilaPintar = fila - aMoverFila
   }
-
-  if (fichaSeleccionada.movPintarDer <= 7 && fichaSeleccionada.movFilaPintar <= 7 && fichaSeleccionada.movFilaPintar >= 0) {
-    if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarDer] === null) {
-      fichaSeleccionada.movDer = true
-  
-      var divPintar = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' +fichaSeleccionada.movPintarDer)
-      divPintar.style.backgroundColor = 'red'
-    }
-  }
-  else{
-      fichaSeleccionada.movDer = false
-  }
-
-  if (fichaSeleccionada.movPintarIzq >= 0 && fichaSeleccionada.movFilaPintar >= 0  && fichaSeleccionada.movFilaPintar <= 7) {
-    if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarIzq] === null) {
-      fichaSeleccionada.movIzq = true
-      var divPintar = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' +fichaSeleccionada.movPintarIzq)
-      divPintar.style.backgroundColor = 'red'
-    }
-  }
-  else{
-      fichaSeleccionada.movIzq = false
-  }
-
-  comprobarComer()
-}
-
-function comprobarComer() {
-  fichaSeleccionada.movComerDerPintado = fichaSeleccionada.movPintarDer + 1
-  fichaSeleccionada.movComerIzqPintado = fichaSeleccionada.movPintarIzq - 1
  
-    if (turno === 1) {
-      
-      fichaSeleccionada.movFilaComerPintado = fichaSeleccionada.movFilaPintar + 1
+    if (fichaSeleccionada.movPintarDer <= 7 && fichaSeleccionada.movFilaPintar <= 7 && fichaSeleccionada.movFilaPintar >= 0) {
 
-      if (fichaSeleccionada.movComerDerPintado <= 7 && fichaSeleccionada.movFilaComerPintado <= 7) {
-        
-        if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarDer] === 2 && tableroArray[fichaSeleccionada.movFilaComerPintado][fichaSeleccionada.movComerDerPintado] === null) {
+      if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarDer] === null) {
 
-          fichaSeleccionada.movComerDer = true
+        if (aMoverFila < 0 && fichaSeleccionada.comerReyArribaDer === false) {
           
-          var divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' +fichaSeleccionada.movComerDerPintado)
+          fichaSeleccionada.movDer = true
+      
+          var divPintar = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' +fichaSeleccionada.movPintarDer)
+          divPintar.style.backgroundColor = 'red'
+        }
+        if (aMoverFila > 0 && fichaSeleccionada.comerReyAbajoDer === false) {
+          
+          fichaSeleccionada.movDer = true
+      
+          var divPintar = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' +fichaSeleccionada.movPintarDer)
           divPintar.style.backgroundColor = 'red'
         }
       }
-      else{
-        fichaSeleccionada.movComerDer = false
-      }
+    }
+    else{
+        fichaSeleccionada.movDer = false
+    }  
+    if (fichaSeleccionada.movPintarIzq >= 0 && fichaSeleccionada.movFilaPintar >= 0  && fichaSeleccionada.movFilaPintar <= 7) {
 
-      if (fichaSeleccionada.movComerIzqPintado >= 0 && fichaSeleccionada.movFilaComerPintado <= 7) {
+      if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarIzq] === null) {
+
+        if (aMoverFila < 0 && fichaSeleccionada.comerReyArribaIzq === false) {
         
+          fichaSeleccionada.movIzq = true
+
+          var divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaPintar +'-col-' + fichaSeleccionada.movPintarIzq)
+          divPintar.style.backgroundColor = 'red'
+        }
+        if (aMoverFila > 0 && fichaSeleccionada.comerReyAbajoIzq === false) {
+        
+          fichaSeleccionada.movIzq = true
+      
+          var divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaPintar +'-col-' + fichaSeleccionada.movPintarIzq)
+          divPintar.style.backgroundColor = 'red'
+        }
+      }
+    }
+    else{
+        fichaSeleccionada.movIzq = false
+        if (fichaSeleccionada.esRey === true) {
+          fichaSeleccionada.noSeguirMovimientoReyIzq = false;
+        }
+    }
+
+  comprobarComer(aMoverFila, aMoverColumna)
+}
+
+function comprobarComer(aMoverFila, aMoverColumna) {
+  
+  fichaSeleccionada.movComerDerPintado = fichaSeleccionada.idColumna + aMoverColumna +  1
+  fichaSeleccionada.movComerIzqPintado = fichaSeleccionada.idColumna - aMoverColumna -  1
+  
+  if (turno === 1) {
+    
+    if (aMoverFila > 0 || fichaSeleccionada.esRey === false) {
+      fichaSeleccionada.movFilaComerPintado = fichaSeleccionada.idFila + aMoverFila + 1
+    }
+    else{
+      fichaSeleccionada.movFilaComerPintado = fichaSeleccionada.idFila + aMoverFila - 1
+        }
+        
+        if (fichaSeleccionada.movComerDerPintado <= 7 && fichaSeleccionada.movFilaComerPintado <= 7) {
+  
+          if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarDer] === 2 && tableroArray[fichaSeleccionada.movFilaComerPintado][fichaSeleccionada.movComerDerPintado] === null) {
+            
+            fichaSeleccionada.movComerDer = true
+            
+            var divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' +fichaSeleccionada.movComerDerPintado)
+            divPintar.style.backgroundColor = 'red'
+            
+            
+            // if (aMoverFila < 0 && fichaSeleccionada.esRey === true) {
+              
+            //   fichaSeleccionada.comerReyArribaDer = true
+            // }
+            // if (aMoverFila > 0 && fichaSeleccionada.esRey === true) {
+              
+            //   fichaSeleccionada.comerReyAbajoDer = true
+            // }
+            
+          }
+        } else{
+          fichaSeleccionada.movComerDer = false
+        }
+
+        if (fichaSeleccionada.movComerIzqPintado >= 0 && fichaSeleccionada.movComerIzqPintado <= 7 && fichaSeleccionada.movFilaComerPintado <= 7 && fichaSeleccionada.movFilaComerPintado >= 0) {
         if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarIzq] === 2 && tableroArray[fichaSeleccionada.movFilaComerPintado][fichaSeleccionada.movComerIzqPintado] === null) {
 
           fichaSeleccionada.movComerIzq = true
           
           var divPintar = document.getElementById('fila-' +  fichaSeleccionada.movFilaComerPintado +'-col-' +fichaSeleccionada.movComerIzqPintado)
           divPintar.style.backgroundColor = 'red'
+
+          // if (aMoverFila < 0) {
+          //   fichaSeleccionada.comerReyArribaIzq = true
+          //   console.log("entre");
+
+          // }else{
+          //   fichaSeleccionada.comerReyAbajoIzq = true
+          //   console.log("entre");
+          // }
         }
       }
        else{
@@ -243,7 +287,7 @@ function comprobarComer() {
     } else {
     
         fichaSeleccionada.movFilaComerPintado = fichaSeleccionada.movFilaPintar - 1
-        if (fichaSeleccionada.movComerDerPintado <= 7 && fichaSeleccionada.movFilaComerPintado >= 0) {
+        if (fichaSeleccionada.movComerDerPintado >= 0 && fichaSeleccionada.movComerDerPintado <= 7 && fichaSeleccionada.movFilaComerPintado >= 0 && fichaSeleccionada.movFilaComerPintado <= 7) {
           
           if (tableroArray[fichaSeleccionada.movFilaPintar][fichaSeleccionada.movPintarDer] === 1 && tableroArray[fichaSeleccionada.movFilaComerPintado][fichaSeleccionada.movComerDerPintado] === null) {
 
@@ -251,6 +295,12 @@ function comprobarComer() {
             
             var divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' +fichaSeleccionada.movComerDerPintado)
             divPintar.style.backgroundColor = 'red'
+
+            if (aMoverFila < 0) {
+              fichaSeleccionada.comerReyArribaDer = true
+            }else{
+              fichaSeleccionada.comerReyAbajoDer = true
+            }
           }
         }
         else{
@@ -265,34 +315,39 @@ function comprobarComer() {
             
             var divPintar = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' + fichaSeleccionada.movComerIzqPintado)
             divPintar.style.backgroundColor = 'red'
+
+            if (aMoverFila < 0) {
+              fichaSeleccionada.comerReyArribaIzq = true
+            }else{
+              fichaSeleccionada.comerReyAbajoIzq = true
+            }
           }
         }
         else{
         fichaSeleccionada.movComerIzq = false
         }
-      }
-  
-    agregarClickPosiblesMov()
+    }
+
+    agregarClickPosiblesMov(aMoverFila, aMoverColumna);
 }
 
-
-  function agregarClickPosiblesMov() {
+  function agregarClickPosiblesMov(aMoverFila, aMoverColumna) {
     
     if (fichaSeleccionada.movIzq) {
       var divMover = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' + fichaSeleccionada.movPintarIzq)
-      divMover.setAttribute('onClick', 'moverFicha(' + fichaSeleccionada.movFilaPintar + ',' + fichaSeleccionada.movPintarIzq +', "")')
+      divMover.setAttribute('onClick', 'moverFicha(' + fichaSeleccionada.movFilaPintar + ',' + fichaSeleccionada.movPintarIzq +', "",' + aMoverFila + ',' + aMoverColumna + ')')
     }
     if (fichaSeleccionada.movDer) {
       var divMover = document.getElementById('fila-' + fichaSeleccionada.movFilaPintar +'-col-' + fichaSeleccionada.movPintarDer)
-      divMover.setAttribute('onClick', 'moverFicha(' + fichaSeleccionada.movFilaPintar + ',' + fichaSeleccionada.movPintarDer + ', "")')
+      divMover.setAttribute('onClick', 'moverFicha(' + fichaSeleccionada.movFilaPintar + ',' + fichaSeleccionada.movPintarDer + ', "",' + aMoverFila + ',' + aMoverColumna +')')
     }
     if (fichaSeleccionada.movComerDer) {
       var divMover = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' + fichaSeleccionada.movComerDerPintado)
-      divMover.setAttribute('onClick', 'moverFicha(' + fichaSeleccionada.movFilaComerPintado + ',' + fichaSeleccionada.movComerDerPintado + ', "derecha")')
+      divMover.setAttribute('onClick', 'moverFicha(' + fichaSeleccionada.movFilaComerPintado + ',' + fichaSeleccionada.movComerDerPintado + ', "derecha",' + aMoverFila + ',' + aMoverColumna +')')
     }
     if (fichaSeleccionada.movComerIzq) {
       var divMover = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado +'-col-' + fichaSeleccionada.movComerIzqPintado)
-      divMover.setAttribute('onClick', 'moverFicha(' + fichaSeleccionada.movFilaComerPintado + ',' + fichaSeleccionada.movComerIzqPintado +', "izquierda")')
+      divMover.setAttribute('onClick', 'moverFicha(' + fichaSeleccionada.movFilaComerPintado + ',' + fichaSeleccionada.movComerIzqPintado +', "izquierda",' + aMoverFila + ',' + aMoverColumna +')')
     }
   } 
   
@@ -307,9 +362,7 @@ function resetearTablero() {
   resetearObjeto()
 }
 
-
-
-function moverFicha(filaMover, columnaMover, tipoComer) {
+function moverFicha(filaMover, columnaMover, tipoComer, aMoverFila, aMoverColumna) {
 
   //CREACION DE LA NUEVA FICHA
   var divPadre = document.getElementById('fila-' + filaMover +'-col-' + columnaMover)
@@ -332,8 +385,9 @@ function moverFicha(filaMover, columnaMover, tipoComer) {
     }
   }
 
-  if (filaMover === 0 || filaMover === 7) {
 
+  //SI SE MUEVE EN LAS ULTIMAS FILAS Y NO ES REY, SE LE AGREGA ESTE ATRIBUTO
+  if (filaMover === 0 || filaMover === 7) {
     if (fichaSeleccionada.esRey === false) {
       newDama.classList.add('rey')
       if (turno === 1) {
@@ -352,32 +406,30 @@ function moverFicha(filaMover, columnaMover, tipoComer) {
   tableroArray[fichaSeleccionada.idFila][fichaSeleccionada.idColumna] = null;
   
   //ELIMINACION DE LA FICHA DEL USUARIO CONTRARIO SI LO COME
+
   if (tipoComer == 'izquierda') {
     if (turno === 1) {
-      var divEnemigoElimanado = document.getElementById('fila-' + (fichaSeleccionada.idFila + 1)  +'-col-' +  (fichaSeleccionada.idColumna -1))
+      var divEnemigoElimanado = document.getElementById('fila-' + (fichaSeleccionada.idFila + aMoverFila)  +'-col-' +  (fichaSeleccionada.idColumna - aMoverColumna))
       divEnemigoElimanado.innerHTML = ''
-      tableroArray[fichaSeleccionada.idFila + 1][fichaSeleccionada.idColumna - 1] = null
+      tableroArray[fichaSeleccionada.idFila + aMoverFila][fichaSeleccionada.idColumna - aMoverColumna] = null
     }else{
-      var divEnemigoElimanado = document.getElementById('fila-' + (fichaSeleccionada.idFila - 1)  +'-col-' +  (fichaSeleccionada.idColumna -1))
+      var divEnemigoElimanado = document.getElementById('fila-' + (fichaSeleccionada.idFila + aMoverFila)  +'-col-' +  (fichaSeleccionada.idColumna + aMoverColumna))
       divEnemigoElimanado.innerHTML = ''
-      tableroArray[fichaSeleccionada.idFila - 1][fichaSeleccionada.idColumna - 1] = null
+      tableroArray[fichaSeleccionada.idFila + aMoverFila][fichaSeleccionada.idColumna - aMoverColumna] = null
     }
   }
   if (tipoComer == 'derecha') {
     if (turno === 1) {
-      var divEnemigoElimanado = document.getElementById('fila-' + (fichaSeleccionada.idFila + 1)  +'-col-' +  (fichaSeleccionada.idColumna +1))
+      var divEnemigoElimanado = document.getElementById('fila-' + (fichaSeleccionada.idFila + aMoverFila)  +'-col-' +  (fichaSeleccionada.idColumna + aMoverColumna))
       divEnemigoElimanado.innerHTML = ''
-      tableroArray[fichaSeleccionada.idFila + 1][fichaSeleccionada.idColumna + 1] = null
+      tableroArray[fichaSeleccionada.idFila + aMoverFila][fichaSeleccionada.idColumna + aMoverColumna] = null
     }else{
-      var divEnemigoElimanado = document.getElementById('fila-' + (fichaSeleccionada.idFila - 1)  +'-col-' +  (fichaSeleccionada.idColumna +1))
+      var divEnemigoElimanado = document.getElementById('fila-' + (fichaSeleccionada.idFila + aMoverFila)  +'-col-' +  (fichaSeleccionada.idColumna + aMoverColumna))
       divEnemigoElimanado.innerHTML = ''
-      tableroArray[fichaSeleccionada.idFila - 1][fichaSeleccionada.idColumna + 1] = null
+      tableroArray[fichaSeleccionada.idFila + aMoverFila][fichaSeleccionada.idColumna + aMoverColumna] = null
     }
 
   }
-
-
-  
   
   resetearTablero()
   quitarEventosClickPosibles()
@@ -385,16 +437,16 @@ function moverFicha(filaMover, columnaMover, tipoComer) {
 
 function quitarEventosClickPosibles(){
   if (fichaSeleccionada.movIzq) {
-     var divMover = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' + fichaSeleccionada.movPintarIzq)
-     divMover.removeAttribute('onclick')
+    var divMover = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' + fichaSeleccionada.movPintarIzq)
+    divMover.removeAttribute('onclick')
   }
   if (fichaSeleccionada.movDer) {
     var divMover = document.getElementById('fila-' +fichaSeleccionada.movFilaPintar +'-col-' + fichaSeleccionada.movPintarDer)
     divMover.removeAttribute('onclick')
   }
   if (fichaSeleccionada.movComerDer) {
-     var divMover = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado  +'-col-' + fichaSeleccionada.movComerDerPintado)
-     divMover.removeAttribute('onclick')
+    var divMover = document.getElementById('fila-' + fichaSeleccionada.movFilaComerPintado  +'-col-' + fichaSeleccionada.movComerDerPintado)
+    divMover.removeAttribute('onclick')
   }
   if (fichaSeleccionada.movComerIzq) {
     var divMover = document.getElementById('fila-' +fichaSeleccionada.movFilaComerPintado +'-col-' + fichaSeleccionada.movComerIzqPintado)
@@ -417,27 +469,28 @@ function quitarEventosClicks() {
     }
   }
   actualizarPuntos()
+  cambiarTurno()
 }
 
 function actualizarPuntos() {
-  var parrafoPuntosJugador = null
-
-  if (turno === 1) {
-    parrafoPuntosJugador = document.getElementById('puntos-jugador1')
-    parrafoPuntosJugador.innerHTML = 13 - fichasVerdes.length
-  } else{
-    parrafoPuntosJugador = document.getElementById('puntos-jugador2')
-    parrafoPuntosJugador.innerHTML = 13 - fichasAmarillas.length
-  }
+  var parrafoPuntosJugador1 = null
+  var parrafoPuntosJugador2 = null
   
-  if (fichasAmarillas.length == 1) {
+  parrafoPuntosJugador1 = document.getElementById('puntos-jugador1')
+  parrafoPuntosJugador1.innerHTML = 13 - fichasVerdes.length
+
+  parrafoPuntosJugador2 = document.getElementById('puntos-jugador2')
+  parrafoPuntosJugador2.innerHTML = 13 - fichasAmarillas.length
+
+  
+  if (fichasAmarillas.length === 1) {
     alert('¡¡Felicitaciones jugador verde has ganado la partida!!')
   }
- if (fichasVerdes.length == 1) {
+ if (fichasVerdes.length === 1) {
     alert('¡¡Felicitaciones jugador amarillo has ganado la partida!!')
   }
 
-	cambiarTurno()
+	
 }
 
 function cambiarTurno(){
@@ -455,19 +508,23 @@ function cambiarTurno(){
 }
 
 function resetearObjeto() {
-    fichaSeleccionada.id = null,
-    fichaSeleccionada.esRey = false,
-    fichaSeleccionada.movIzq = false,
-    fichaSeleccionada.movDer = false,
-    fichaSeleccionada.movComerIzq = false,
-    fichaSeleccionada.movComerDer = false,
-    fichaSeleccionada.movPintarIzq = null,
-    fichaSeleccionada.movPintarDer = null,
-    fichaSeleccionada.movComerDerPintado = null,
-    fichaSeleccionada.movComerIzqPintado = null,
-    agregarEvento()
-    quitarEvento = false
-    contadorClicks = 0
+  fichaSeleccionada.id = null,
+  fichaSeleccionada.esRey = false,
+  fichaSeleccionada.movIzq = false,
+  fichaSeleccionada.movDer = false,
+  fichaSeleccionada.movComerIzq = false,
+  fichaSeleccionada.movComerDer = false,
+  fichaSeleccionada.movPintarIzq = null,
+  fichaSeleccionada.movPintarDer = null,
+  fichaSeleccionada.movComerDerPintado = null,
+  fichaSeleccionada.movComerIzqPintado = null,
+  fichaSeleccionada.comerReyArribaDer = false,
+  fichaSeleccionada.comerReyArribaIzq = false,
+  fichaSeleccionada.comerReyAbajoDer = false,
+  fichaSeleccionada.comerReyAbajoIzq = false,
+  agregarEvento()
+  quitarEvento = false
+  contadorClicks = 0
 }
 
 agregarEvento()
@@ -482,16 +539,13 @@ botonCargarPartida.addEventListener('click', cargarPartida)
 
 function guardarPartida() {
   
-    localStorage.setItem('tablero', JSON.stringify(tableroArray))
-    localStorage.setItem('turno', turno)
+  localStorage.setItem('tablero', JSON.stringify(tableroArray))
+  localStorage.setItem('turno', JSON.stringify(turno))
 }
 
 function cargarPartida() {
   
   tableroArray = JSON.parse(localStorage.getItem('tablero'))
-  turno = localStorage.getItem(turno)
+  turno = JSON.parse(localStorage.getItem('turno'))
   resetearTablero()
 }
-
-
-
