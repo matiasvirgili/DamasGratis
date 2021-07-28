@@ -127,23 +127,23 @@ div.boton {
 	cursor: pointer;
 	margin: 0 10px;
 }
-#guardar{
-	background-color: #bf9e75;
-	border: 2.5px solid #bf9e75;
-	box-shadow: 0 0 9px #bf9e75;
-}
-
 .button:hover {
 	background-color: #0B3954;
 	border-color: #0B3954;
 	box-shadow:0 0 9px #0B3954;
 }
+.amarillos{
+	background-color: #bf9e75;
+	border: 2.5px solid #bf9e75;
+	box-shadow: 0 0 9px #bf9e75;
+}
 
-#guardar:hover{
+.amarillos:hover{
 	background-color: #0B3954;
 	border-color: #0B3954;
 	box-shadow:0 0 9px #0B3954;
 }
+
 
 /* Casillas */
 

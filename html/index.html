@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="../css/style.css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine" />
 	<script src="../js/app.js" defer></script>
+
 </head>
 
 <body>
@@ -32,7 +33,7 @@
 				<div class="damasAmarillas"> </div>
 			</div>
 
-			<p>Jugador 1</p>
+			<p id="jugador-1">Null</p>
 			<p>Puntos:</p>
 			<p id="puntos-jugador1" class="puntos">0</p>
 		</div>
@@ -46,15 +47,15 @@
 				<div class="damasVerdes"> </div>
 			</div>
 
-			<p>Jugador 2</p>
+			<p id="jugador-2">Null</p>
 			<p>Puntos:</p>
 			<p id="puntos-jugador2" class="puntos">0</p>
 		</div>
 	</main>
 	<div class="boton">
-		<input type="button" id="guardar" class="button" value="Guardar partida" />
-		<input type="button" class="button" value="Nueva partida" />
-		<input type="button" id="cargar" class="button" value="Cargar partida" />
+		<input type="button" id="guardar" class="button amarillos" value="Guardar partida" />
+		<input type="button" id="nueva-partida" class="button" value="Nueva partida" />
+		<input type="button" id="cargar" class="button amarillos" value="Cargar partida" />
 
 	</div>
 
@@ -65,6 +66,10 @@
 			<a href="https://es.wikipedia.org/wiki/Damas">¿Cómo jugar?</a>
 		</div>
 	</footer>
+	<script src="/js/jugadores.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
 </body>
 
 </html>

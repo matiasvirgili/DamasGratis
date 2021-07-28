@@ -1,3 +1,4 @@
+
 // VARIABLES GLOBALES
 
 var turno = 1
@@ -462,3 +463,4 @@ function cargarPartida() {
   turno = JSON.parse(localStorage.getItem('turno'))
   resetearTablero()
 }
+
