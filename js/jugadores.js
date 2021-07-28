@@ -3,7 +3,6 @@ var boton = document.getElementById('nueva-partida')
 var nombreJugador1 = document.getElementById('jugador-1')
 var nombreJugador2 = document.getElementById('jugador-2')
 
-
 boton.addEventListener('click', agregarNombreJugador)
 
 async function agregarNombreJugador() {
@@ -34,3 +33,20 @@ async function agregarNombreJugador() {
     }, 2400)
 }
 
+// localStorage
+var botonGuardarPartida = document.getElementById('guardar')
+var botonCargarPartida = document.getElementById('cargar')
+
+botonGuardarPartida.addEventListener('click', guardarPartida)
+botonCargarPartida.addEventListener('click', cargarPartida)
+
+function guardarPartida() {
+  localStorage.setItem('tablero', JSON.stringify(tableroArray))
+  localStorage.setItem('turno', JSON.stringify(turno))
+}
+
+function cargarPartida() {
+  tableroArray = JSON.parse(localStorage.getItem('tablero'))
+  turno = JSON.parse(localStorage.getItem('turno'))
+  resetearTablero()
+}
