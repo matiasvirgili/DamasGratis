@@ -1,4 +1,3 @@
-
 // VARIABLES GLOBALES
 
 var turno = 1
@@ -6,6 +5,13 @@ var fichasAmarillas = document.getElementsByClassName('damasAmarillas')
 var fichasVerdes = document.getElementsByClassName('damasVerdes')
 var jugador1 = document.getElementById('jugador1');
 var jugador2 = document.getElementById('jugador2');
+var pj1 = document.getElementById('pj1')
+var pj2 = document.getElementById('pj2')
+var j1 = document.getElementById('j1')
+var j2 = document.getElementById('j2')
+var fecha = document.getElementById('fecha')
+
+
 
 var damaSelec = {
   idFila: null,
@@ -380,11 +386,28 @@ function actualizarPuntos() {
     setTimeout(()=>{
       swal('¡Felicitaciones ' + nombreJugador1.innerHTML + ' ganaste la partida!')
     },300)
+
+    localStorage.setItem('j1', JSON.stringify(nombreJugador1))
+    localStorage.setItem('pj1',JSON.stringify(fichasAmarillas.length))
+
+    j1.innerText = JSON.parse(localStorage.getItem('j1'))
+    pj1.innerText = JSON.parse(localStorage.getItem('pj1'))
+
+    fechaGuardar = new Date()
+
+    localStorage.setItem('fecha',JSON.stringify(fechaGuardar))
+    fecha.textContent = JSON.parse(localStorage.getItem('fecha'))
   }
   if (fichasVerdes.length === 1) {
    setTimeout(()=>{
       swal('¡Felicitaciones ' + nombreJugador2.innerHTML + ' ganaste la partida!')
     },300)
+
+    localStorage.setItem('j2', JSON.stringify(nombreJugador2))
+    localStorage.setItem('pj2',JSON.stringify(fichasVerdes.length))
+
+    j2.innerText = JSON.parse(localStorage.getItem('j1'))
+    pj2.innerText = JSON.parse(localStorage.getItem('pj2'))
   }	
 }
 

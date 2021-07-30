@@ -9,8 +9,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Damas Gratis</title>
 	<link rel="stylesheet" href="../css/style.css" />
+	<link rel="stylesheet" href="../css/popup.css">
+	<link rel="stylesheet" href="../css/jugadores.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine" />
-
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -19,6 +21,7 @@
 		<nav class="navegacion">
 			<h1>DAMAS GRATIS</h1>
 			<div class="registro-login">
+				<a id="historial" href="#">Historial</a>
 				<a href="registro.html">Registro</a>
 				<a href="#"> Iniciar sesión</a>
 			</div>
@@ -26,6 +29,39 @@
 	</header>
 
 	<main>
+		<!--Historial de partidas-->
+		<div id="contenedor-modal" class="contenedor-modal">
+			<div id="modal" class="modal modal-cerrar">
+				<h2>Historial de partidas</h2>
+				<div class="datos">
+					<div id="dato" class="dato">
+						<h2 id="j1">jugador1</h2>
+						<h2 id="pj1">12</h2>
+						<h2 id="j2">jugador2</h2>
+						<h2 id="pj2">12</h2>
+						<h2 id="fecha">fecha</h2>
+					</div>
+					<button id="cerrar">Cerrar</button>
+				</div>
+
+			</div>
+		</div>
+
+		<!--Nombre de los jugadores-->
+		<div id="cont-nombre-jugadores" class="cont-nombre-jugadores">
+			<div id="popup-jugadores" class="popup-jugadores cerrar-popup-jugadores">
+				<h2>Ingrese nombres de los jugadores</h2>
+				<div class="cont-info-jugadores">
+					<input class="input-nombre" type="text" id="jugador-N1" placeholder="Jugador N°1" required>
+					<input class="input-nombre" type="text" id="jugador-N2" placeholder="Jugador N°2" required>
+				</div>
+				<div class="cont-btn">
+					<button id="aceptar" class="btns">Aceptar</button>
+					<button id="cerrar-popup-jugadores" class="btns">Cerrar</button>
+				</div>
+			</div>
+		</div>
+
 		<!-- Jugador 1-->
 		<div id="jugador1" class="contenedorJugadores">
 			<div class="casillasNegras">
@@ -66,7 +102,8 @@
 		</div>
 	</footer>
 	<script src="/js/jugadores.js"></script>
-	<script src="../js/app.js" defer></script>
+	<script src="/js/app.js"></script>
+	<script src="/js/historial.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
