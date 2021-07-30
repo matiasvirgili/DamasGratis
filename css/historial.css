@@ -1,0 +1,102 @@
+/** Contenedor popup historial **/
+.contenedor-historial{
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.popup-historial{
+    width: 35%;
+    height: 45%;
+    background: #F2F2F2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    position: relative;
+    transition: transform 1s;
+    transform: translateY(0%);
+    border-radius: 10px;
+}
+.popup-historial h2{
+     margin-bottom: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem;
+    color: black;
+}
+/** Fin contenedor popup historial **/
+
+
+/** Descripcion **/
+.descripcion{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.descripcion h3{
+     font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    margin: 25px;
+    color: black;
+}
+
+
+/** Contenedor historial de datos **/
+.datos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.dato{
+    display: flex;
+    width: 60%;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid lightgray;
+}
+.dato h2{
+    margin: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    font-size: .9rem;
+    color: black;
+}
+/** Fin contenedor historial de datos **/
+
+
+/** Botones **/
+.cont-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-h{
+    margin: 5px;
+    background-color: #e2504c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+}
+#cerrar-popup-historial:hover{
+    background-color: #ff6961;
+}
+/** Fin Botones **/
+
+
+
+.historial-cerrar{
+    transform: translateY(-200%);
+}

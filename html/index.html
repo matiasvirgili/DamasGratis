@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Damas Gratis</title>
 	<link rel="stylesheet" href="../css/style.css" />
-	<link rel="stylesheet" href="../css/popup.css">
+	<link rel="stylesheet" href="../css/historial.css">
 	<link rel="stylesheet" href="../css/jugadores.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine" />
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
@@ -30,9 +30,16 @@
 
 	<main>
 		<!--Historial de partidas-->
-		<div id="contenedor-modal" class="contenedor-modal">
-			<div id="modal" class="modal modal-cerrar">
+		<div id="contenedor-historial" class="contenedor-historial">
+			<div id="popup-historial" class="popup-historial historial-cerrar">
 				<h2>Historial de partidas</h2>
+				<div class="descripcion">
+					<h3>Jugador</h3>
+					<h3>Puntos</h3>
+					<h3>Jugador</h3>
+					<h3>Puntos</h3>
+					<h3>Fecha</h3>
+				</div>
 				<div class="datos">
 					<div id="dato" class="dato">
 						<h2 id="j1">jugador1</h2>
@@ -41,7 +48,9 @@
 						<h2 id="pj2">12</h2>
 						<h2 id="fecha">fecha</h2>
 					</div>
-					<button id="cerrar">Cerrar</button>
+				</div>
+				<div class="cont-btn">
+					<button id="cerrar-popup-historial" class="btn-h">Cerrar</button>
 				</div>
 
 			</div>

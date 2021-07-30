@@ -55,24 +55,6 @@ function validarCamposJugadores(){
 btnAceptarJugadores.addEventListener('click',validarCamposJugadores)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // localStorage
 var btnNuevaPartidaGuardarPartida = document.getElementById('guardar')
 var btnNuevaPartidaCargarPartida = document.getElementById('cargar')
