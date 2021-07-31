@@ -55,23 +55,22 @@ function validarCamposJugadores(){
 btnAceptarJugadores.addEventListener('click',validarCamposJugadores)
 
 
-// localStorage
-var btnNuevaPartidaGuardarPartida = document.getElementById('guardar')
-var btnNuevaPartidaCargarPartida = document.getElementById('cargar')
+// // localStorage
+// var btnNuevaPartidaGuardarPartida = document.getElementById('guardar')
+// var btnNuevaPartidaCargarPartida = document.getElementById('cargar')
 
-btnNuevaPartidaGuardarPartida.addEventListener('click', guardarPartida)
-btnNuevaPartidaCargarPartida.addEventListener('click', cargarPartida)
+// btnNuevaPartidaGuardarPartida.addEventListener('click', guardarPartida)
+// btnNuevaPartidaCargarPartida.addEventListener('click', cargarPartida)
 
-function guardarPartida() {
-  localStorage.setItem('tablero', JSON.stringify(tableroArray))
-  localStorage.setItem('turno', JSON.stringify(turno))
-}
+// function guardarPartida() {
+//   localStorage.setItem('tablero', JSON.stringify(tableroArray))
+//   localStorage.setItem('turno', JSON.stringify(turno))
+// }
 
-function cargarPartida() {
-  tableroArray = JSON.parse(localStorage.getItem('tablero'))
-  turno = JSON.parse(localStorage.getItem('turno'))
-  resetearTablero()
-}
-
+// function cargarPartida() {
+//   tableroArray = JSON.parse(localStorage.getItem('tablero'))
+//   turno = JSON.parse(localStorage.getItem('turno'))
+//   resetearTablero()
+// }
 
 

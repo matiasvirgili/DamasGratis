@@ -5,9 +5,10 @@ var fichasAmarillas = document.getElementsByClassName('damasAmarillas')
 var fichasVerdes = document.getElementsByClassName('damasVerdes')
 var jugador1 = document.getElementById('jugador1');
 var jugador2 = document.getElementById('jugador2');
-
-
-
+var primerJugador = document.getElementById('jugador-1')
+var segundoJugador = document.getElementById('jugador-2')
+var parrafoPuntosJugador1 = document.getElementById('puntos-jugador1')
+var parrafoPuntosJugador2 = document.getElementById('puntos-jugador2')
 
 var damaSelec = {
   idFila: null,
@@ -368,6 +369,7 @@ function moverFicha(filaMover, columnaMover, tipoComer, aMoverFila, aMoverColumn
   resetearTablero()
 }
 
+
 function actualizarPuntos() {
   var parrafoPuntosJugador1 = null
   var parrafoPuntosJugador2 = null
@@ -382,11 +384,13 @@ function actualizarPuntos() {
     setTimeout(()=>{
       swal('¡Felicitaciones ' + nombreJugador1.innerHTML + ' ganaste la partida!')
     },300)
+    guardarHistorial()
   }
   if (fichasVerdes.length === 1) {
    setTimeout(()=>{
       swal('¡Felicitaciones ' + nombreJugador2.innerHTML + ' ganaste la partida!')
     },300)
+    guardarHistorial()
   }	
 }
 
