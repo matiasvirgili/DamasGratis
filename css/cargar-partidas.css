@@ -13,9 +13,9 @@
     justify-content: center;
     align-items: center;
 }
-.cargar-partidas{
-    width: 950px;
-    height: 650px;
+.cargar-partidass{
+    width: 750px;
+    height: 550px;
     background: #F2F2F2;
     text-align: center;
     display: flex;
@@ -26,33 +26,30 @@
     transition: transform 1s;
     transform: translateY(0%);
     border-radius: 10px;
-    overflow: auto;
 }
-.cargar-partidas h2{
+.cargar-partidass h2{
     margin-bottom: 15px;
     font-family: 'Poppins', sans-serif;
     font-size: 1.6rem;
     color: black;
-    /* position: absolute; */
 }
-
 /** Fin contenedor popup historial **/
 
 
-/** Descripcion **/
+/* * Descripcion * */
 .descripcion-partidas{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     
-}
+} 
 .descripcion-partidas h3{
     font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
     color: black;
-    margin: 0 40px; 
-}
+    margin: 0 60px; 
+} */
 
 
 /** Contenedor historial de datos **/
@@ -67,11 +64,17 @@
 }
 .partida{
     display: flex;
-    width: 70%;
+    width: 100%;
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid lightgray;
     margin-bottom: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.partida:hover{
+background-color: lightgray;
+color: #fff;
 }
 .partida h2{
     margin: 0 50px;
@@ -80,25 +83,11 @@
     font-size: .9rem;
     color: black;
 }
-.cont-partidas-a-cargar::-webkit-scrollbar{
-    width: 7px;
-}
-.cont-partidas-a-cargar::-webkit-scrollbar-thumb {
-	background: #79D0F2;
-	border-radius: 5px;
-}
-
 /** Fin contenedor historial de datos **/
 
 
 /** Botones **/
-.cont-btn{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-.btn-h{
+.btn-c{
     margin: 5px;
     background-color: #e2504c;
     color: #fff;
@@ -109,17 +98,8 @@
     font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
 }
-#cerrar-popup-historial:hover{
+#cerrar-popup-partidas:hover{
     background-color: #ff6961;
-}
-.btn-filtros{
-    background-color: #79D0F2;
-}
-#ordenar-fecha{
-    margin-right: 230px;
-}
-.btn-filtros:hover{
-    background-color: #99D9F2;
 }
 /** Fin Botones **/
 

@@ -116,27 +116,25 @@ function guardarHistorial(){
     localStorage.setItem(('HistorialPartidas' + numeroHistorial), JSON.stringify([nombreJugador1.innerHTML, parrafoPuntosJugador1.innerHTML + '-' +  parrafoPuntosJugador2.innerHTML, nombreJugador2.innerHTML, fechaYHora]))
 }
 
-ordenarFecha.addEventListener('click', ordenarPorFecha)
-ordenarPorPuntaje.addEventListener('click', ordenarPorPuntaje)
 
 function ordenarPorFecha(){
-   
+    
     recorrerHistorialParaArray()
-
-   if (contadorFecha === 0) {
-
+    
+    if (contadorFecha === 0) {
+        
         arrayHistorial.sort(function(a, b){
-        if(a[3] < b[3])return -1;
-        if(a[3] > b[3])return 1;
-        return 0;
+            if(a[3] < b[3])return -1;
+            if(a[3] > b[3])return 1;
+            return 0;
         }).reverse()
         contadorFecha++
     }else{
-
+        
         arrayHistorial.sort(function(a, b){
-        if(a[3] < b[3])return -1;
-        if(a[3] > b[3])return 1;
-        return 0;
+            if(a[3] < b[3])return -1;
+            if(a[3] > b[3])return 1;
+            return 0;
         })
         contadorFecha--
     }
@@ -144,9 +142,9 @@ function ordenarPorFecha(){
 }
 
 function ordenarPorPuntaje(){
-
+    
     recorrerHistorialParaArray()
-
+    
     if (contadorPuntaje === 0) {
         
         arrayHistorial.sort(function(a, b){
@@ -156,8 +154,8 @@ function ordenarPorPuntaje(){
         })
         contadorPuntaje++
     }else{
-
-           arrayHistorial.sort(function(a, b){
+        
+        arrayHistorial.sort(function(a, b){
             if(a[1] < b[1])return -1;
             if(a[1] > b[1])return 1;
             return 0;
@@ -166,6 +164,9 @@ function ordenarPorPuntaje(){
     }
     crearHistorial()
 }
+
+ordenarFecha.addEventListener('click', ordenarPorFecha)
+ordenarPuntos.addEventListener('click', ordenarPorPuntaje)
 
 function recorrerHistorialParaArray(){
     arrayHistorial = []

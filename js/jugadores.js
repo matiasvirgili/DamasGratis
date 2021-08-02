@@ -10,6 +10,7 @@ var inputJugador2 = document.getElementById('jugador-N2')
 
 var numPartidasGuardadas = 0
 
+
 btnNuevaPartida.addEventListener('click', (e)=>{
     e.preventDefault()
     contNombreJugadores.style.opacity = '1'
@@ -105,16 +106,11 @@ function guardarPartida() {
   }
 }
 
-function cargarPartida(partidaGuardara) { //EL PARTIDA GUARDADA ES PARA CLICKEAR ENTRE TODAS LAS PARTIDAS GANADAS Y QUE SE CARGUE EL TABLERO POR MEDIO EL CLICK EN EL INNERHTML DEL CLICKEADO
-  var cargaDatosPartida = JSON.parse(localStorage.getItem(toString(partidaGuardara)))
-  tableroArray = cargaDatosPartida[0]
-  turno =  cargaDatosPartida[1]
-  nombreJugador1.innerHTML = cargaDatosPartida[2]
-  nombreJugador2.innerHTML = cargaDatosPartida[3]
-  resetearTablero()
-}
 
+var divContenedorPartidas = document.getElementById('cont-partidas-a-cargar')
 function mostrarPartidas(){
+  divContenedorPartidas.innerHTML = ''
+
   var arrayPartidas = []
   for (let i = 0; i < localStorage.length; i++) {
     if (localStorage.key(i).indexOf('Partida:') >= 0){
@@ -123,10 +119,36 @@ function mostrarPartidas(){
     }
   }
   arrayPartidas.sort().reverse()
-
+  
+  
   for (let i = 0; i < arrayPartidas.length; i++) {
-    //ACA CAMBIAR POR INNERHTML CON EL LOCALSTORAGE.KEY(i)
-    console.log(arrayPartidas[i])
+
+    var divPartida = document.createElement('div')
+    var h2fechaPartida = document.createElement('h2')
+    var h2jugadoresPartida = document.createElement('h2')
+    h2fechaPartida.id = 'fechaPartida-L' + i
+    h2jugadoresPartida.id = 'jugadoresPartida-L' + i
+    divPartida.id = 'partida-L' + i
+    divPartida.classList = 'partida'
+
+    divContenedorPartidas.appendChild(divPartida)
+    divPartida.appendChild(h2fechaPartida)
+    divPartida.appendChild(h2jugadoresPartida)
+    
+    h2fechaPartida.innerHTML = arrayPartidas[i][0]
+    h2jugadoresPartida.innerHTML = arrayPartidas[i][1]
+
+    divPartida.addEventListener('click', (e)=>{
+      var cargaDatosPartida = JSON.parse(localStorage.getItem('Partida: ' + arrayPartidas[i][0]))
+      console.log('Partida:' + arrayPartidas[i][0]);
+      tableroArray = cargaDatosPartida[0]
+      turno =  cargaDatosPartida[1]
+      nombreJugador1.innerHTML = cargaDatosPartida[2]
+      nombreJugador2.innerHTML = cargaDatosPartida[3]
+
+      resetearTablero()
+      cerrarPoPUpPartidas()
+    })
   }
 }
 
