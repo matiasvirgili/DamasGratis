@@ -19,7 +19,7 @@
 	<header>
 		<!--Navegación-->
 		<nav class="navegacion">
-			<h1>DAMAS GRATIS</h1>
+			<h1>Damas Gratis</h1>
 			<div class="registro-login">
 				<a id="historial" href="#">Historial</a>
 				<a href="registro.html">Registro</a>
@@ -37,20 +37,14 @@
 					<h3>Jugador</h3>
 					<h3>Puntos</h3>
 					<h3>Jugador</h3>
-					<h3>Puntos</h3>
 					<h3>Fecha</h3>
 				</div>
-				<div id="datos" class="datos">
-					<!-- <div id="dato" class="dato">
-						 <h2 id="j1">jugador1</h2>
-						<h2 id="pj1">12</h2>
-						<h2 id="j2">jugador2</h2>
-						<h2 id="pj2">12</h2>
-						<h2 id="fecha">fecha</h2> -->
+				<div id="datos" class="datos"></div>
+				<div class="cont-btn">
+					<button id="ordenar-puntos" class="btn-h btn-filtros">Puntos</button>
+					<button id="ordenar-fecha" class="btn-h btn-filtros">Fecha</button>
+					<button id="cerrar-popup-historial" class="btn-h">Cerrar</button>
 				</div>
-			</div>
-			<div class="cont-btn">
-				<button id="cerrar-popup-historial" class="btn-h">Cerrar</button>
 			</div>
 
 		</div>
@@ -71,30 +65,45 @@
 			</div>
 		</div>
 
-		<!-- Jugador 1-->
-		<div id="jugador1" class="contenedorJugadores">
-			<div class="casillasNegras">
-				<div class="damasAmarillas"> </div>
+		<div id="cont-cargar-partidas" class="cont-cargar-partidas">
+			<div id="cargar-partidas" class="cargar-partidas cerrar-partidas">
+				<h2>Cargar partidas guardadas</h2>
+				<div class="descripcion-partidas">
+					<h3>Fecha</h3>
+					<h3>Jugadores</h3>
+					<div class="cont-partidas-a-cargar">
+						<div class="partida">
+							<h2>fecha</h2>
+							<h2>jugadores</h2>
+						</div>
+					</div>
+				</div>
 			</div>
 
-			<p id="jugador-1">Null</p>
-			<p id="puntosPj1">Puntos:</p>
-			<p id="puntos-jugador1" class="puntos">0</p>
-		</div>
+			<!-- Jugador 1-->
+			<div id="jugador1" class="contenedorJugadores">
+				<div class="casillasNegras">
+					<div class="damasAmarillas"> </div>
+				</div>
 
-		<!--Tablero-->
-		<div id="tablero" class="tablero"></div>
-
-		<!-- Jugador 2-->
-		<div id="jugador2" class="contenedorJugadores">
-			<div class="casillasNegras">
-				<div class="damasVerdes"> </div>
+				<p id="nombreJugador1">Matias</p>
+				<p id="puntosPj1">Puntos:</p>
+				<p id="puntos-jugador1" class="puntos">0</p>
 			</div>
 
-			<p id="jugador-2">Null</p>
-			<p id="puntosPj2">Puntos:</p>
-			<p id="puntos-jugador2" class="puntos">0</p>
-		</div>
+			<!--Tablero-->
+			<div id="tablero" class="tablero"></div>
+
+			<!-- Jugador 2-->
+			<div id="jugador2" class="contenedorJugadores">
+				<div class="casillasNegras">
+					<div class="damasVerdes"> </div>
+				</div>
+
+				<p id="nombreJugador2">Ivan12</p>
+				<p id="puntosPj2">Puntos:</p>
+				<p id="puntos-jugador2" class="puntos">0</p>
+			</div>
 	</main>
 	<div class="boton">
 		<input type="button" id="guardar" class="button amarillos" value="Guardar partida" />
@@ -110,8 +119,8 @@
 			<a href="https://es.wikipedia.org/wiki/Damas">¿Cómo jugar?</a>
 		</div>
 	</footer>
-	<script src="/js/jugadores.js"></script>
 	<script src="/js/app.js"></script>
+	<script src="/js/jugadores.js"></script>
 	<script src="/js/historial.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 

@@ -3,6 +3,12 @@ var cerrarHistorial = document.getElementById('cerrar-popup-historial')
 var abrir = document.getElementById('historial')
 var popupHistorial = document.getElementById('popup-historial')
 var contenedorHistorial = document.getElementById('contenedor-historial')
+var arrayHistorial = []
+var ordenarFecha = document.getElementById('ordenar-fecha')
+var ordenarPuntos = document.getElementById('ordenar-puntos')
+var contadorFecha = 0
+var contadorPuntaje = 0
+
 
 abrir.addEventListener('click', (e)=>{
     e.preventDefault()
@@ -38,42 +44,44 @@ window.addEventListener('click', (e)=>{
 function crearHistorial(){
     var contenedorDatos = document.getElementById('datos')
     contenedorDatos.innerHTML = ''
+    recorrerHistorialParaArray()
+
+    if(arrayHistorial.length != 0)
+    for (let i = 0; i < arrayHistorial.length; i++) {
+        var dato = document.createElement('div')
+        var j1 = document.createElement('h2')
+        var puntos = document.createElement('h2')
+        var j2 = document.createElement('h2')
+        var puntos = document.createElement('h2')
+        var fecha = document.createElement('h2')
     
-    for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.getItem('HistorialPartidas' + i)) {
-            var dato = document.createElement('div')
-            var j1 = document.createElement('h2')
-            var j2 = document.createElement('h2')
-            var pj1 = document.createElement('h2')
-            var pj2 = document.createElement('h2')
-            var fecha = document.createElement('h2')
+        j1.id = 'j1-L' + i
+        puntos.id = 'puntos-L' + i
+        j2.id = 'j2-L' + i
+        fecha.id = 'fecha-L' + i
+        dato.id = 'dato-L' + i
+        dato.classList = 'dato'
         
-            j1.id = 'j1-L' + i
-            pj1.id = 'pj1-L' + i
-            j2.id = 'j2-L' + i
-            pj2.id = 'pj2-L' + i
-            fecha.id = 'fecha-L' + i
-            dato.id = 'dato-L' + i
-            dato.classList = 'dato'
-            
-            contenedorDatos.appendChild(dato)
-            dato.appendChild(j1)
-            dato.appendChild(pj1)
-            dato.appendChild(j2)
-            dato.appendChild(pj2)
-            dato.appendChild(fecha)
+        contenedorDatos.appendChild(dato)
+        dato.appendChild(j1)
+        dato.appendChild(puntos)
+        dato.appendChild(j2)
+        dato.appendChild(fecha)
+    
+        var cargaDeDatos = []
+        cargaDeDatos = arrayHistorial[i]
         
-        
-            var cargaDeDatos = JSON.parse(localStorage.getItem('HistorialPartidas' + i))
-            
-            j1.innerHTML = cargaDeDatos[0]
-            pj1.innerHTML = cargaDeDatos[1]
-            
-            j2.innerHTML = cargaDeDatos[2]
-            pj2.innerHTML = cargaDeDatos[3]
-            
-            fecha.innerHTML = cargaDeDatos[4]
-        }
+        j1.innerHTML = cargaDeDatos[0]
+        puntos.innerHTML = cargaDeDatos[1]   
+        j2.innerHTML = cargaDeDatos[2]
+        fecha.innerHTML = cargaDeDatos[3]
+    } else{
+        var dato = document.createElement('div')
+        contenedorDatos.appendChild(dato)
+        var partidasInexistentes = document.createElement('h2')
+        partidasInexistentes.id = 'partidasInexistentes'
+        partidasInexistentes.innerHTML = "No se han encontrado partidas"
+        dato.appendChild(partidasInexistentes)
     }
 }
 
@@ -105,5 +113,66 @@ function guardarHistorial(){
         numeroHistorial++
     } 
 
-    localStorage.setItem(('HistorialPartidas' + numeroHistorial), JSON.stringify([primerJugador.innerHTML, parrafoPuntosJugador1.innerHTML, segundoJugador.innerHTML, parrafoPuntosJugador2.innerHTML, fechaYHora]))
+    localStorage.setItem(('HistorialPartidas' + numeroHistorial), JSON.stringify([nombreJugador1.innerHTML, parrafoPuntosJugador1.innerHTML + '-' +  parrafoPuntosJugador2.innerHTML, nombreJugador2.innerHTML, fechaYHora]))
 }
+
+ordenarFecha.addEventListener('click', ordenarPorFecha)
+ordenarPorPuntaje.addEventListener('click', ordenarPorPuntaje)
+
+function ordenarPorFecha(){
+   
+    recorrerHistorialParaArray()
+
+   if (contadorFecha === 0) {
+
+        arrayHistorial.sort(function(a, b){
+        if(a[3] < b[3])return -1;
+        if(a[3] > b[3])return 1;
+        return 0;
+        }).reverse()
+        contadorFecha++
+    }else{
+
+        arrayHistorial.sort(function(a, b){
+        if(a[3] < b[3])return -1;
+        if(a[3] > b[3])return 1;
+        return 0;
+        })
+        contadorFecha--
+    }
+    crearHistorial()
+}
+
+function ordenarPorPuntaje(){
+
+    recorrerHistorialParaArray()
+
+    if (contadorPuntaje === 0) {
+        
+        arrayHistorial.sort(function(a, b){
+            if(a[1] < b[1])return -1;
+            if(a[1] > b[1])return 1;
+            return 0;
+        })
+        contadorPuntaje++
+    }else{
+
+           arrayHistorial.sort(function(a, b){
+            if(a[1] < b[1])return -1;
+            if(a[1] > b[1])return 1;
+            return 0;
+        }).reverse()
+        contadorPuntaje--
+    }
+    crearHistorial()
+}
+
+function recorrerHistorialParaArray(){
+    arrayHistorial = []
+    for (let i = localStorage.length; i >= 0; i--) {
+        if (localStorage.getItem('HistorialPartidas' + i)){
+            arrayHistorial.push(JSON.parse(localStorage.getItem('HistorialPartidas' + i)))
+        }
+    }
+}
+

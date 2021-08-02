@@ -1,5 +1,5 @@
 /** Contenedor popup historial **/
-.contenedor-historial{
+.cont-cargar-partidas{
     opacity: 0;
     visibility: hidden;
     position: fixed;
@@ -13,7 +13,7 @@
     justify-content: center;
     align-items: center;
 }
-.popup-historial{
+.cargar-partidas{
     width: 950px;
     height: 650px;
     background: #F2F2F2;
@@ -28,7 +28,7 @@
     border-radius: 10px;
     overflow: auto;
 }
-.popup-historial h2{
+.cargar-partidas h2{
     margin-bottom: 15px;
     font-family: 'Poppins', sans-serif;
     font-size: 1.6rem;
@@ -40,14 +40,14 @@
 
 
 /** Descripcion **/
-.descripcion{
+.descripcion-partidas{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     
 }
-.descripcion h3{
+.descripcion-partidas h3{
     font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
     color: black;
@@ -56,7 +56,7 @@
 
 
 /** Contenedor historial de datos **/
-.datos{
+.cont-partidas-a-cargar{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,7 +65,7 @@
     margin-top: 20px;
     overflow-y: scroll;
 }
-.dato{
+.partida{
     display: flex;
     width: 70%;
     align-items: center;
@@ -73,17 +73,17 @@
     border-bottom: 1px solid lightgray;
     margin-bottom: 15px;
 }
-.dato h2{
+.partida h2{
     margin: 0 50px;
     font-family: 'Poppins', sans-serif;
     font-weight: 200;
     font-size: .9rem;
     color: black;
 }
-.datos::-webkit-scrollbar{
+.cont-partidas-a-cargar::-webkit-scrollbar{
     width: 7px;
 }
-.datos::-webkit-scrollbar-thumb {
+.cont-partidas-a-cargar::-webkit-scrollbar-thumb {
 	background: #79D0F2;
 	border-radius: 5px;
 }
@@ -123,7 +123,6 @@
 }
 /** Fin Botones **/
 
-.historial-cerrar{
+.cerrar-partidas{
     transform: translateY(-200%);
 }
-
