@@ -228,6 +228,17 @@ main {
         height: 8vw;
     }
 }
+@media(max-width: 400px){
+	.button{
+	padding: 7px 10px;
+	font-size: .5em;
+	}
+	.casillasNegras, .casillasBlancas{
+        width: 11vw;
+        height: 11vw;
+    }
+	
+}
 
 /* Footer */
 

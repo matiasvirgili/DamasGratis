@@ -126,3 +126,58 @@
     transform: translateY(-200%);
 }
 
+@media(max-width:1050px){
+    .popup-historial{
+        width: 650px;
+        height: 450px;
+    }
+}
+@media(max-width:700px){
+    .popup-historial{
+        width: 450px;
+        height: 450px;
+    }
+    .popup-historial h2{
+        font-size: 1.3rem;
+    }
+    .descripcion{
+        width: 60%;        
+    }
+    .descripcion h3{
+        font-size: .7rem;
+    }
+    .datos{
+        width: 90%;
+    }
+    .dato h2{
+        font-size: .8rem;
+    }
+    .btn-h{
+        padding: 5px 10px;
+        font-size: .6rem;
+    }
+}
+@media(max-width:400px){
+    .popup-historial{
+        width: 350px;
+        height: 450px;
+    }
+    .descripcion h3{
+        margin: 0 20px;
+        font-size: .6rem;
+    }
+    .datos{
+        width: 100%;
+    }
+    .dato h2{
+        margin: 0 20px;
+        font-size: .5rem;
+    }
+    .btn-h{
+        padding: 5px 10px;
+        font-size: .5rem;
+    }
+    #ordenar-fecha{
+    margin-right: 100px;
+    }
+}

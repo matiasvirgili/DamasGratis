@@ -49,7 +49,7 @@
     font-size: 1.1rem;
     color: black;
     margin: 0 60px; 
-} */
+} 
 
 
 /** Contenedor historial de datos **/
@@ -58,10 +58,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    width: 100%;
+    width: 70%;
     margin-top: 20px;
-    overflow-y: scroll;
-}
+ }
 .partida{
     display: flex;
     width: 100%;
@@ -73,8 +72,8 @@
     cursor: pointer;
 }
 .partida:hover{
-background-color: lightgray;
-color: #fff;
+    background-color: lightgray;
+    color: #fff;
 }
 .partida h2{
     margin: 0 50px;
@@ -105,4 +104,37 @@ color: #fff;
 
 .cerrar-partidas{
     transform: translateY(-200%);
+}
+
+@media(max-width: 780px){
+    .cargar-partidass{
+        width: 550px;
+        height: 450px;
+    }
+}
+@media(max-width: 580px){
+    .cargar-partidass{
+        width: 400px;
+        height: 450px;
+    }
+    .cont-partidas-a-cargar{
+        width: 85%;
+    }
+    .btn-c{
+        font-size: .9rem;
+    }
+
+}
+@media(max-width: 420px){
+    .cargar-partidass{
+        width: 300px;
+        height: 450px;
+    }
+    .cont-partidas-a-cargar{
+        width: 95%;
+    }
+    .btn-c{
+        font-size: .8rem;
+    }
+
 }

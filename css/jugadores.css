@@ -18,8 +18,8 @@
     flex-direction: column;
     justify-content: space-evenly;
     position: relative;
-    width: 35%;
-    height: 45%;
+    width: 650px;
+    height: 450px;
     transition: transform 1s;
     transform: translateY(0%);
     text-align: center;
@@ -85,7 +85,42 @@ background-color: #ff6961;
 }
 /** Fin botones **/
 
-
 .cerrar-popup-jugadores{
     transform: translateY(-200%);
+}
+
+@media(max-width: 715px){
+    .popup-jugadores{
+        width: 450px;
+        height: 350px;
+    }
+    .popup-jugadores h2{
+        font-size: 1.2rem;
+    }
+    .cont-info-jugadores input{
+    margin: 10px;
+    width: 250px;
+    padding: 10px;
+    font-size: 1.1rem;
+    }
+    .btns{
+        padding: 5px 10px;
+        font-size: .8rem;
+    }
+}
+
+@media(max-width:400px){
+   .popup-jugadores{
+        width: 330px;
+        height: 350px;
+    }
+    .popup-jugadores h2{
+        font-size: 1rem;
+    }
+    .cont-info-jugadores input{
+        margin: 10px;
+        width: 200px;
+        padding: 10px;
+        font-size: 1.1rem;
+    }
 }

@@ -65,17 +65,17 @@ var tableroArray = [
 //   [2, null, null, null, null, null, null, null],
 // ]
 
-// //Tablero para verificar movimientos de comer en todo sentido, de la dama comun
-// var tableroArray = [   
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, 2, null, 2, null],
-//   [null, null, null, null, null, 1, null, null],
-//   [null, null, null, null, 2, null, 2, null],
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, null, null, null, null],
-//   ]
+//Tablero para verificar movimientos de comer en todo sentido, de la dama comun
+var tableroArray = [   
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, 2, null, 2, null],
+  [null, null, null, null, null, 1, null, null],
+  [null, null, null, null, 2, null, 2, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  ]
   
 //caso contrario al enterior
   // var tableroArray = [   
