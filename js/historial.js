@@ -5,9 +5,12 @@ var popupHistorial = document.getElementById('popup-historial')
 var contenedorHistorial = document.getElementById('contenedor-historial')
 var arrayHistorial = []
 var ordenarFecha = document.getElementById('ordenar-fecha')
-var ordenarPuntos = document.getElementById('ordenar-puntos')
+var ordenarPuntosJ1 = document.getElementById('ordenar-puntos-j1')
+var ordenarPuntosJ2 = document.getElementById('ordenar-puntos-j2')
 var contadorFecha = 0
-var contadorPuntaje = 0
+var contadorPuntaje1 = 0
+var contadorPuntaje2 = 0
+
 
 
 abrir.addEventListener('click', (e)=>{
@@ -15,7 +18,8 @@ abrir.addEventListener('click', (e)=>{
     contenedorHistorial.style.opacity = '1'
     contenedorHistorial.style.visibility = 'visible'
     popupHistorial.classList.toggle('historial-cerrar')
-
+    
+    recorrerHistorialParaArray()
     crearHistorial()
 })
 
@@ -44,7 +48,6 @@ window.addEventListener('click', (e)=>{
 function crearHistorial(){
     var contenedorDatos = document.getElementById('datos')
     contenedorDatos.innerHTML = ''
-    recorrerHistorialParaArray()
 
     if(arrayHistorial.length != 0)
     for (let i = 0; i < arrayHistorial.length; i++) {
@@ -118,9 +121,6 @@ function guardarHistorial(){
 
 
 function ordenarPorFecha(){
-    
-    recorrerHistorialParaArray()
-    
     if (contadorFecha === 0) {
         
         arrayHistorial.sort(function(a, b){
@@ -128,45 +128,86 @@ function ordenarPorFecha(){
             if(a[3] > b[3])return 1;
             return 0;
         }).reverse()
+        console.log(arrayHistorial)
         contadorFecha++
     }else{
-        
         arrayHistorial.sort(function(a, b){
             if(a[3] < b[3])return -1;
             if(a[3] > b[3])return 1;
             return 0;
         })
+        console.log(arrayHistorial)
         contadorFecha--
+    }
+    console.log(arrayHistorial)
+    crearHistorial()
+}
+
+function ordenarPorPuntajeJugador1(){
+
+    if (contadorPuntaje1 === 0) {
+        
+        arrayHistorial.sort(function(a, b){
+            var primer = a[1].split('-')
+            var segundo = b[1].split('-')
+            var pun1 = primer[0]
+            var pun2 = segundo[0]
+            
+            if(pun1 > pun2) return 1
+            if(pun1 < pun2) return -1
+            return 0
+        })
+        contadorPuntaje1++
+    }else{     
+        arrayHistorial.sort(function(a, b){
+            var primer = a[1].split('-')
+            var segundo = b[1].split('-')
+            var pun1 = primer[0]
+            var pun2 = segundo[0]
+            
+            if(pun1 > pun2) return 1
+            if(pun1 < pun2) return -1
+            return 0
+        }).reverse()
+        contadorPuntaje1--
     }
     crearHistorial()
 }
 
-function ordenarPorPuntaje(){
-    
-    recorrerHistorialParaArray()
-    
-    if (contadorPuntaje === 0) {
+function ordenarPorPuntajeJugador2(){
+
+    if (contadorPuntaje2 === 0) {
         
         arrayHistorial.sort(function(a, b){
-            if(a[1] < b[1])return -1;
-            if(a[1] > b[1])return 1;
-            return 0;
+            var primer = a[1].split('-')
+            var segundo = b[1].split('-')
+            var pun1 = primer[1]
+            var pun2 = segundo[1]
+            
+            if(pun1 > pun2) return 1
+            if(pun1 < pun2) return -1
+            return 0
         })
-        contadorPuntaje++
-    }else{
-        
+        contadorPuntaje2++
+    }else{     
         arrayHistorial.sort(function(a, b){
-            if(a[1] < b[1])return -1;
-            if(a[1] > b[1])return 1;
-            return 0;
+            var primer = a[1].split('-')
+            var segundo = b[1].split('-')
+            var pun1 = primer[0]
+            var pun2 = segundo[0]
+            
+            if(pun1 > pun2) return 1
+            if(pun1 < pun2) return -1
+            return 0
         }).reverse()
-        contadorPuntaje--
+        contadorPuntaje2--
     }
     crearHistorial()
 }
 
 ordenarFecha.addEventListener('click', ordenarPorFecha)
-ordenarPuntos.addEventListener('click', ordenarPorPuntaje)
+ordenarPuntosJ1.addEventListener('click', ordenarPorPuntajeJugador1)
+ordenarPuntosJ2.addEventListener('click', ordenarPorPuntajeJugador2)
 
 function recorrerHistorialParaArray(){
     arrayHistorial = []
@@ -176,4 +217,3 @@ function recorrerHistorialParaArray(){
         }
     }
 }
-
