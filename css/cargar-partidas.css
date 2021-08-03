@@ -74,6 +74,7 @@
 .partida:hover{
     background-color: lightgray;
     color: #fff;
+    border-radius: 10px;
 }
 .partida h2{
     margin: 0 50px;

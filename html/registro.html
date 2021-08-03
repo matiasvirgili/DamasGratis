@@ -6,7 +6,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../css/style.css">
-	<script src="../js/registro.js"></script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine" />
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
 
@@ -27,13 +26,14 @@
 
 	<section class="form-registro">
 		<h4>Formulario de Registro</h4>
-		<input class="controles" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre">
-		<input class="controles" type="text" name="apellido" id="apellido" placeholder="Ingrese su Apellido">
-		<input class="controles" type="email" name="correo" id="correo" placeholder="Ingrese su Email">
-		<input class="controles" type="text" name="comentario" id="comentario" placeholder="Ingrese su Comentario">
+
+		<input class="controles" type="text" name="nombre" id="nombre" placeholder="Nombre completo">
+		<input class="controles" type="e-mail" name="correo" id="correo" placeholder="Email">
+		<input class="controles" type="text" name="comentario" id="comentario" placeholder="Mensaje">
 		<p>Estoy de acuerdo con los <a href="#">Terminos y Condiciones</a></p>
-		<input id="boton-registro" class="boton-registro" type="submit" value="Registrar">
+		<button id="enviarCorreo"> Enviar correo</button>
 		<p><a href="#">¿Ya tengo Cuenta?</a></p>
+
 	</section>
 
 
@@ -44,6 +44,7 @@
 			<a href="https://es.wikipedia.org/wiki/Damas">¿Cómo jugar?</a>
 		</div>
 	</footer>
+	<script src="/js/registro.js"></script>
 </body>
 
 </html>

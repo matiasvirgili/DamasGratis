@@ -41,16 +41,16 @@ var MovimientosPermitidos = {
 // TABLERO
 
 //original
-var tableroArray = [
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-  ]
+// var tableroArray = [
+//     [null, null, null, null, null, null, null, null],
+//     [null, null, null, null, null, null, null, null],
+//     [null, null, null, null, null, null, null, null],
+//     [null, null, null, null, null, null, null, null],
+//     [null, null, null, null, null, null, null, null],
+//     [null, null, null, null, null, null, null, null],
+//     [null, null, null, null, null, null, null, null],
+//     [null, null, null, null, null, null, null, null],
+//   ]
 
 
 // //Tablero para verificar soplada de ficha
@@ -66,16 +66,16 @@ var tableroArray = [
 // ]
 
 //Tablero para verificar movimientos de comer en todo sentido, de la dama comun
-// var tableroArray = [   
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, 2, null, 2, null],
-//   [null, null, null, null, null, 1, null, null],
-//   [null, null, null, null, 2, null, 2, null],
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, null, null, null, null],
-//   ]
+var tableroArray = [   
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, 2, null, 2, null],
+  [null, null, null, null, null, 1, null, null],
+  [null, null, null, null, 2, null, 2, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  ]
   
 //caso contrario al enterior
   // var tableroArray = [   
@@ -640,59 +640,93 @@ function esEmpate(){
 
       if (tableroArray[i][k] === turno || tableroArray[i][k] === (turno*11)) { //Verificamos que en esa casilla haya una dama comun o rey del turno actual     
 
-          try {
-            if(tableroArray[i-1][k-1] === fichaEnemiga || tableroArray[i-1][k-1] === (fichaEnemigaRey)){
-              if(tableroArray[i-2][k-2] === fichaEnemiga || tableroArray[i-2][k-2] === (fichaEnemigaRey)){
+        try {
+          if(tableroArray[i-1][k-1] === fichaEnemiga || tableroArray[i-1][k-1] === (fichaEnemigaRey)){ //verificamos en su proxima casillas, 1 casilla arriba de la suya, si hay un enemigo
+            if(tableroArray[i-2][k-2] === fichaEnemiga || tableroArray[i-2][k-2] === (fichaEnemigaRey) || tableroArray[i-2][k-2] === undefined){//varificamos en su segunda casilla, 2 casillas arriba de la suya, si hay un enemigo o se excede del tablero
+              arribaIzq = true //si hay un enemigo en su casilla proxima de arriba y otro enemigo lo obstruye de comerlo
+            } else{
+              arribaIzq = false //si hay un enemigo en su casilla proxima de arriba y puede comer
+            }
+          } else{
+            if(tableroArray[i-1][k-1] === turno || tableroArray[i-1][k-1] === undefined){ //verificamos en su proxima casilla si existe una dama de su proximo equipo o se excede del tablero
+              arribaIzq = true
+            } else{
+              if ((turno === 2 && tableroArray[i][k] === 2) || tableroArray[i][k] === 11) { //verificamos que si es el turno del verde y no es reina, esta atrapada de arriba izq, ya que no se puede mover a ese lado
+                arribaIzq = false
+              } else{
                 arribaIzq = true
               }
-            } else{
-              arribaIzq = true 
             }
-          } catch (error){
-            arribaIzq = true
           }
+        } catch (error) {
+          arribaIzq = true
+        }
 
-          try {
-            if(tableroArray[i-1][k+1] === fichaEnemiga || tableroArray[i-1][k+1] === (fichaEnemigaRey)){
-              if(tableroArray[i-2][k+2] === fichaEnemiga || tableroArray[i-2][k+2] === (fichaEnemigaRey)){
+        try {
+          if(tableroArray[i-1][k+1] === fichaEnemiga || tableroArray[i-1][k+1] === (fichaEnemigaRey)){
+            if(tableroArray[i-2][k+2] === fichaEnemiga || tableroArray[i-2][k+2] === (fichaEnemigaRey) || tableroArray[i-2][k+2] === undefined){
+              arribaDer = true
+            } else{
+              arribaDer = false
+            }
+          } else{
+            if(tableroArray[i-1][k+1] === turno || tableroArray[i-1][k+1] === undefined){
+              arribaDer = true
+            } else{
+              if ((turno === 2 && tableroArray[i][k] === 2) || tableroArray[i][k] === 11) {
+                arribaDer = false
+              } else{
                 arribaDer = true
               }
-            } else{
-              arribaDer = true
             }
-          } catch (error) {
-            arribaDer = true
-          }
+          } 
+        } catch (error) {
+          arribaDer = true
+        }
 
-          try {
-            if(tableroArray[i+1][k-1] === fichaEnemiga || tableroArray[i+1][k-1] === (fichaEnemigaRey)){ //verificamos si hay ficha enemiga
-              if(tableroArray[i+2][k-2] === fichaEnemiga || tableroArray[i+2][k-2] === (fichaEnemigaRey)){ //verificamos en el caso de ser enemiga si se puede comer
+        try {
+          if(tableroArray[i+1][k-1] === fichaEnemiga || tableroArray[i+1][k-1] === (fichaEnemigaRey)){ //verificamos si hay ficha enemiga
+            if(tableroArray[i+2][k-2] === fichaEnemiga || tableroArray[i+2][k-2] === (fichaEnemigaRey) || tableroArray[i+2][k-2] === undefined){ //verificamos en el caso de ser enemiga si se puede comer
+              abajoIzq = true
+            } else{
+              abajoIzq = false
+            }
+          } else{
+            if(tableroArray[i+1][k-1] === turno || tableroArray[i+1][k-1] === undefined){
+              abajoIzq = true
+            } else{
+              if ((turno === 1 && tableroArray[i][k] === 1) || tableroArray[i][k] === 22) {
+                abajoIzq = false
+              } else{
                 abajoIzq = true
               }
-            } else{
-              if(tableroArray[i+1][k-1] === turno){
-                abajoIzq = true
-              }
             }
-          } catch (error) {
-            abajoIzq = true
           }
+        } catch (error) {
+          abajoIzq = true
+        }
 
-          try {
-            if(tableroArray[i+1][k+1] === fichaEnemiga || tableroArray[i+1][k+1] === (fichaEnemigaRey)){
-              if(tableroArray[i+2][k+2] === fichaEnemiga || tableroArray[i+2][k+2] === (fichaEnemigaRey)){
-                abajoDer = true
-              }
+        try {
+          if(tableroArray[i+1][k+1] === fichaEnemiga || tableroArray[i+1][k+1] === (fichaEnemigaRey)){
+            if(tableroArray[i+2][k+2] === fichaEnemiga || tableroArray[i+2][k+2] === (fichaEnemigaRey) || tableroArray[i+2][k+2] === undefined){
+              abajoDer = true
             } else{
-              if (tableroArray[i+1][k+1] === turno) {
+              abajoDer = false
+            }
+          } else{
+            if (tableroArray[i+1][k+1] === turno || tableroArray[i+1][k+1] === undefined) {
+              abajoDer = true
+            } else{
+              if ((turno === 1 && tableroArray[i][k] === 1) || tableroArray[i][k] === 22) {
+                abajoDer = false
+              }  else{
                 abajoDer = true
               }
             }
-          } catch (error) {
-            abajoDer = true
           }
-        
-        
+        } catch (error) {
+          abajoDer = true
+        }
 
         if (arribaIzq === true && arribaDer === true && abajoIzq === true && abajoDer=== true) {
           arrayEmpate.push(true)
@@ -707,15 +741,36 @@ function esEmpate(){
       contadorTrues++
     }
   }
-  if (contadorTrues > 0 || (ReyesAmarillosLength === 1 && ReyesVerdesLenght === 1)) {    
-    if (contadorTrues === arrayEmpate.length || (ReyesAmarillosLength === 1 && ReyesVerdesLenght === 1 && damasAmarillasLenght === 0 && damasVerdesLenght === 0)) {
+
+  if ((contadorTrues > 0 && contadorTrues === arrayEmpate.length)) {
+    if (damasAmarillasLenght > damasVerdesLenght) {
       setTimeout(() => {
-        swal('¡Felicitaciones han logrado un Empate')
+        swal('¡Felicitaciones ' + nombreJugador1.innerHTML + ' ganaste la partida!')
+        setTimeout(() => {
+          swal('Por regla: "Si el jugador en turno no puede mover puesto que todas las piezas que le restan en juego están bloqueada, gana quien más piezas tenga"')
+        }, 3000);
       }, 100);
-      guardarHistorial() 
-      eventosALasDamas = false
-      resetearTablero()
     }
+    if (damasVerdesLenght > damasAmarillasLenght) {
+      setTimeout(() => {
+        swal('¡Felicitaciones ' + nombreJugador2.innerHTML + ' ganaste la partida!')
+        setTimeout(() => {
+          swal('Por regla: "Si el jugador en turno no puede mover puesto que todas las piezas que le restan en juego están bloqueada, gana quien más piezas tenga"')
+        }, 3000);
+      }, 100);
+    }
+    guardarHistorial() 
+    eventosALasDamas = false
+    resetearTablero()
+  }
+
+  if((ReyesAmarillosLength === 1 && ReyesVerdesLenght === 1  && damasAmarillasLenght === 0 && damasVerdesLenght === 0)){
+    setTimeout(() => {
+      swal('¡Felicitaciones han logrado un Empate!')
+    }, 100);
+    guardarHistorial() 
+    eventosALasDamas = false
+    resetearTablero()
   }
 }
 
