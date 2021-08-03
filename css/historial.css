@@ -66,7 +66,7 @@
 }
 .dato{
     display: flex;
-    width: 70%;
+    width: 80%;
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid lightgray;
