@@ -56,7 +56,7 @@ function validarCamposJugadores(){
       [2, null, 2, null, 2, null, 2, null],
     ]
     resetearTablero()
-
+    turno = 2
     popupJugadores.classList.toggle('cerrar-popup-jugadores')
     
     setTimeout(()=>{
@@ -141,6 +141,7 @@ function mostrarPartidas(){
           nombreJugador2.innerHTML = cargaDatosPartida[3]
 
           resetearTablero()
+          actualizarPuntos()
           cerrarPoPUpPartidas()
         })
       }

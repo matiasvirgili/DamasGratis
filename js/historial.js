@@ -118,6 +118,7 @@ function guardarHistorial(){
     } 
 
     localStorage.setItem(('HistorialPartidas' + numeroHistorial), JSON.stringify([nombreJugador1.innerHTML, parrafoPuntosJugador1.innerHTML + '-' +  parrafoPuntosJugador2.innerHTML, nombreJugador2.innerHTML, fechaYHora]))
+    var btnGuardarPartida = document.getElementById('guardar')
 }
 
 
@@ -129,7 +130,6 @@ function ordenarPorFecha(){
             if(a[3] > b[3])return 1;
             return 0;
         }).reverse()
-        console.log(arrayHistorial)
         contadorFecha++
     }else{
         arrayHistorial.sort(function(a, b){
@@ -137,10 +137,8 @@ function ordenarPorFecha(){
             if(a[3] > b[3])return 1;
             return 0;
         })
-        console.log(arrayHistorial)
         contadorFecha--
     }
-    console.log(arrayHistorial)
     crearHistorial()
 }
 

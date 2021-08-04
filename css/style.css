@@ -302,6 +302,7 @@ main {
 	font-size: 1.7rem;
 	margin: 30px 0;
 	color: #ffffff;
+	text-align: center;
 }
 
 .controles{
@@ -316,7 +317,15 @@ main {
 	color:#233D4D;
 }
 #comentario{
-	padding-bottom: 200px ;
+	height: 200px;
+	width: 83%;
+	font-family: 'Poppins', sans-serif;
+	font-size: 1.1rem;
+	background-color: #ffffff;
+	border-radius: 4px;
+	border: 1px solid #79D0F2;
+	margin-bottom: 1.5vw;
+	color:#233D4D;
 }
 #enviarCorreo{
 	cursor: pointer;
@@ -336,6 +345,21 @@ main {
 	border-color: #99D9F2;
 }
 
+@media(max-width:1100px){
+	.form-registro{
+		width: 40vw;
+	}
+}
+@media(max-width:800px){
+	.form-registro{
+		width: 50vw;
+	}
+}
+@media(max-width:400px){
+	.form-registro{
+		width: 80vw;
+	}
+}
 
 
 

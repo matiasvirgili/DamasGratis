@@ -1,6 +1,6 @@
 // VARIABLES GLOBALES
 
-var turno = 1
+var turno = 2
 var fichasAmarillas = document.getElementsByClassName('damasAmarillas')
 var fichasVerdes = document.getElementsByClassName('damasVerdes')
 var jugador1 = document.getElementById('jugador1')
@@ -517,6 +517,7 @@ function moverFicha(filaMover, columnaMover, tipoMovimiento, aMoverFila, aMoverC
   }
 
   cambiarTurno()
+  actualizarPuntos()
   resetearTablero(filaMover, columnaMover)
 }
 
@@ -535,7 +536,6 @@ function resetearTablero(filaMover, columnaMover) {
     } else{
       resetearObjeto() //Reseteo del objeto que comprende todos los movimientos de la dama seleccionada
     }
-    actualizarPuntos()
     agregarEvento()
   }
 }
