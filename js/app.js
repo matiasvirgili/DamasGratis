@@ -41,16 +41,16 @@ var MovimientosPermitidos = {
 // TABLERO
 
 //original
-var tableroArray = [
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null],
-  ]
+// var tableroArray = [
+//     [null, null, null, null, null, null, null, null],
+//     [null, null, null, null, null, null, null, null],
+//     [null, null, null, null, null, null, null, null],
+//     [null, null, null, null, null, null, null, null],
+//     [null, null, null, null, null, null, null, null],
+//     [null, null, null, null, null, null, null, null],
+//     [null, null, null, null, null, null, null, null],
+//     [null, null, null, null, null, null, null, null],
+//   ]
 
 
 // //Tablero para verificar soplada de ficha
@@ -66,16 +66,16 @@ var tableroArray = [
 // ]
 
 //Tablero para verificar movimientos de comer en todo sentido, de la dama comun
-// var tableroArray = [   
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, 2, null, 2, null],
-//   [null, null, null, null, null, 1, null, null],
-//   [null, null, null, null, 2, null, 2, null],
-//   [null, null, null, null, null, null, null, null],
-//   [null, null, null, null, null, null, null, null],
-//   ]
+var tableroArray = [   
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, 2, null, 2, null],
+  [null, null, null, null, null, 1, null, null],
+  [null, null, null, null, 2, null, 2, null],
+  [null, null, null, null, null, null, null, null],
+  [null, null, null, null, null, null, null, null],
+  ]
   
 // caso contrario al enterior
   // var tableroArray = [   
@@ -175,7 +175,7 @@ function crearDamas() {
   }
 }
 
-function agregarEvento() {
+function agregarEvento() {  //Agrega los eventos clicks a las damas del turno activo
   if (eventosALasDamas === true) {
     if (turno === 1) {
       for (var i = 0; i < fichasAmarillas.length; i++) {
@@ -324,7 +324,7 @@ function comprobarComer(aMoverFila, aMoverColumna) {
       damaEnemigaRey = 11
     }
 
-    if (MovimientosPermitidos.SeguirMovComerDerArriba === true || MovimientosPermitidos.SeguirMovComerDerAbajo === true) {
+    if (MovimientosPermitidos.SeguirMovComerDerArriba === true || MovimientosPermitidos.SeguirMovComerDerAbajo === true) { //Validamos que si encuentra una ficha para comer, termine en la posicion actual la validacion
       if (damaSelec.movComerDerPintado <= 7 && damaSelec.movFilaComerPintado <= 7 && damaSelec.movFilaComerPintado >= 0) {   //Validamos que el posible movimiento no se exceda del tablero
 
         if ((tableroArray[damaSelec.movFilaPintar][damaSelec.movPintarDer] === damaEnemiga || tableroArray[damaSelec.movFilaPintar][damaSelec.movPintarDer] === damaEnemigaRey) && tableroArray[damaSelec.movFilaComerPintado][damaSelec.movComerDerPintado] === null) {
@@ -336,9 +336,9 @@ function comprobarComer(aMoverFila, aMoverColumna) {
           var divPintar = document.getElementById('fila-' + damaSelec.movFilaComerPintado +'-col-' +damaSelec.movComerDerPintado)
           divPintar.style.backgroundColor = '#79D0F2'
           
-          if (aMoverFila > 0) {
-            if (turno === 1) {
-              MovimientosPermitidos.SeguirMovComerDerAbajo = false; 
+          if (aMoverFila > 0) { //Se utiliza para dejar de hacer la logica de comer cuando esta ya encuentra una ficha para comer
+            if (turno === 1) { //verificamos que lado es el que se encontro la ficha de comer
+              MovimientosPermitidos.SeguirMovComerDerAbajo = false;  // se utiliza para terminar la verificacion del comprobar comer hacia la derecha
             } else{
               MovimientosPermitidos.SeguirMovComerDerArriba = false; 
             }
@@ -350,16 +350,16 @@ function comprobarComer(aMoverFila, aMoverColumna) {
             }
           }
         } else{
-          damaSelec.movComerDer = false 
+          damaSelec.movComerDer = false //si se encuentra una dama enemiga en el espacio de la derecha pero existe otra dama atras de esta que la impide comer
         }
       } else{
-          damaSelec.movComerDer = false //Si no se encuentra dama enemiga en el espacio a la derecha o se encuentra pero el proximo no es nulo, no se permitira comer
+          damaSelec.movComerDer = false // si se excede del limite del tablero, no se puede comer, osea cuando la ficha esta cerca de una punta
       }
     } else {
-      damaSelec.movComerDer = false
+      damaSelec.movComerDer = false // cuando encotro para comer para abajo y para arriba
     }
 
-    if (MovimientosPermitidos.SeguirMovComerIzqArriba === true || MovimientosPermitidos.SeguirMovComerIzqAbajo === true) {
+    if (MovimientosPermitidos.SeguirMovComerIzqArriba === true || MovimientosPermitidos.SeguirMovComerIzqAbajo === true) { //Validamos que si encuentra una ficha para comer, termine en la posicion actual la validacion
       if (damaSelec.movComerIzqPintado >= 0 && damaSelec.movFilaComerPintado <= 7 && damaSelec.movFilaComerPintado >= 0) { //Validamos que el posible movimiento no se exceda del tablero
         if ((tableroArray[damaSelec.movFilaPintar][damaSelec.movPintarIzq] === damaEnemiga || tableroArray[damaSelec.movFilaPintar][damaSelec.movPintarIzq] === damaEnemigaRey) && tableroArray[damaSelec.movFilaComerPintado][damaSelec.movComerIzqPintado] === null) {
           //Verificamos que la dama a la derecha tenga una dama enemiga (comun o rey) y el espacio siguiente sea nulo
@@ -383,14 +383,14 @@ function comprobarComer(aMoverFila, aMoverColumna) {
             }
           }
         } else{
-          damaSelec.movComerIzq = false 
+          damaSelec.movComerIzq = false //si se encuentra una dama enemiga en el espacio de la izquierda pero existe otra dama atras de esta que la impide comer
         }
       }
       else{
         damaSelec.movComerIzq = false //Si no se encuentra dama enemiga en el espacio a la izquierda o se encuentra pero el proximo no es nulo, no se permitira comer
       }
     } else {
-      damaSelec.movComerIzq = false
+      damaSelec.movComerIzq = false // cuando encotro para comer para abajo y para arriba
     }
   }
 
@@ -410,7 +410,7 @@ function agregarClickPosiblesMov(aMoverFila, aMoverColumna) {
 
   if (damaSelec.movComerDer) {
     var divMover = document.getElementById('fila-' + damaSelec.movFilaComerPintado +'-col-' + damaSelec.movComerDerPintado)
-    if (damaSelec.idFila > damaSelec.movFilaComerPintado) { //verificamos para que lado va el movimiento. Y si es le damos el atributo derecha arriba o abajo, dependiendo de este
+    if (damaSelec.idFila > damaSelec.movFilaComerPintado) { //verificamos para que lado va el movimiento. Y  le damos el atributo derecha arriba o abajo, dependiendo de este
       if (damaSelec.esRey === true && turno === 1) {
         divMover.setAttribute('onClick', 'moverFicha(' + damaSelec.movFilaComerPintado + ',' + damaSelec.movComerDerPintado + ', "derechaArriba",' + aMoverFila + ',' + aMoverColumna +')')    
       } else{
@@ -424,7 +424,7 @@ function agregarClickPosiblesMov(aMoverFila, aMoverColumna) {
       }
     }
   }
-  if (damaSelec.movComerIzq) { //verificamos para que lado va el movimiento. Y si es le damos el atributo derecha arriba o abajo, dependiendo de este
+  if (damaSelec.movComerIzq) { //verificamos para que lado va el movimiento. Y le damos el atributo derecha arriba o abajo, dependiendo de este
     var divMover = document.getElementById('fila-' + damaSelec.movFilaComerPintado +'-col-' + damaSelec.movComerIzqPintado)
     if (damaSelec.idFila > damaSelec.movFilaComerPintado) {
       if (damaSelec.esRey === true && turno === 1) {
@@ -501,8 +501,10 @@ function moverFicha(filaMover, columnaMover, tipoMovimiento, aMoverFila, aMoverC
       tableroArray[fila][damaSelec.idColumna + aMoverColumna] = null //Eliminacion logica de la dama enemiga
       MovimientosPermitidos.SeguirEnTurno = true; 
     }
-  } else {
-    alert("Su ficha ha sido soplada, al tener la posibilidad de comer y no hacerlo")
+  } else { //si tiene la posibilidad de comer, pero hace un movimiento comun
+    setTimeout(()=>{
+      swal("Su ficha ha sido soplada, al tener la posibilidad de comer y no hacerlo")
+    },100)
     var divViejo = document.getElementById('fila-' + damaSelec.idFila +'-col-' +  damaSelec.idColumna) //Obtengo la casilla de la dama seleccionada antes del movimiento
     divViejo.innerHTML = '' //Elimino la dama de la casilla antigua
     tableroArray[damaSelec.idFila][damaSelec.idColumna] = null;  //Elimino la dama antigua del tablero
@@ -595,7 +597,7 @@ function resetearObjeto() {
 }
  
 function resetearObjMovPermitidos(BusquedaAnteriores){ 
-  //La busquedaAnterior va a ser 1 si es una ficha comun o si ya paso el turno, y -1 si la dama clickeada es reina, para buscar los datos inversos sin eliminar los datos de las casillas de abajo
+  //La busquedaAnterior va a ser 1 si es una ficha comun o si ya paso el turno, y -1 si la dama clickeada es reina (para buscar los datos inversos sin eliminar los datos de las casillas de abajo)
   MovimientosPermitidos.SeguirMovDer = true
   MovimientosPermitidos.SeguirMovIzq = true
   if (BusquedaAnteriores === 1) {
@@ -639,7 +641,6 @@ function esEmpate(){
       }
 
       if (tableroArray[i][k] === turno || tableroArray[i][k] === (turno*11)) { //Verificamos que en esa casilla haya una dama comun o rey del turno actual     
-
         try {
           if(tableroArray[i-1][k-1] === fichaEnemiga || tableroArray[i-1][k-1] === (fichaEnemigaRey)){ //verificamos en su proxima casillas, 1 casilla arriba de la suya, si hay un enemigo
             if(tableroArray[i-2][k-2] === fichaEnemiga || tableroArray[i-2][k-2] === (fichaEnemigaRey) || tableroArray[i-2][k-2] === undefined){//varificamos en su segunda casilla, 2 casillas arriba de la suya, si hay un enemigo o se excede del tablero
@@ -685,8 +686,8 @@ function esEmpate(){
         }
 
         try {
-          if(tableroArray[i+1][k-1] === fichaEnemiga || tableroArray[i+1][k-1] === (fichaEnemigaRey)){ //verificamos si hay ficha enemiga
-            if(tableroArray[i+2][k-2] === fichaEnemiga || tableroArray[i+2][k-2] === (fichaEnemigaRey) || tableroArray[i+2][k-2] === undefined){ //verificamos en el caso de ser enemiga si se puede comer
+          if(tableroArray[i+1][k-1] === fichaEnemiga || tableroArray[i+1][k-1] === (fichaEnemigaRey)){ 
+            if(tableroArray[i+2][k-2] === fichaEnemiga || tableroArray[i+2][k-2] === (fichaEnemigaRey) || tableroArray[i+2][k-2] === undefined){ 
               abajoIzq = true
             } else{
               abajoIzq = false
@@ -728,21 +729,25 @@ function esEmpate(){
           abajoDer = true
         }
 
-        if (arribaIzq === true && arribaDer === true && abajoIzq === true && abajoDer=== true) {
+        if (arribaIzq === true && arribaDer === true && abajoIzq === true && abajoDer=== true) { //Si no se puede generar ningun movimiento en la dama parada, asignamos un true al array
           arrayEmpate.push(true)
         } else{
-          arrayEmpate.push(false)
+          arrayEmpate.push(false) //si existe un movimiento posible se le asigna un false
         }
+        //Asignamos un booleano en el arrayEmpate por cada ficha del turno actual encontrada
       }
     }
   }
   for (let i = 0; i < arrayEmpate.length; i++) {
     if (arrayEmpate[i] === true) {
-      contadorTrues++
+      contadorTrues++ //Contamos la cantidad de true, metidos en el array empate
     }
   }
 
-  if ((contadorTrues > 0 && contadorTrues === arrayEmpate.length)) {
+  if ((contadorTrues > 0 && contadorTrues === arrayEmpate.length)) { 
+    //verificamos si el contador de true es mayor a 0 y que el contador de true sea igual a la longitud del array empate, es decir, que en todas sus fichas no se pueda generar ningun movimiento
+    //Verificamos que jugador tiene mas fichas a la hora de quedarse sin movimientos, y este gana la partida
+    //Si tienen la misma cantidad de fichas, se genera un empate
     if (damasAmarillasLenght > damasVerdesLenght) {
       setTimeout(() => {
         swal('¡Felicitaciones ' + nombreJugador1.innerHTML + ' ganaste la partida!')
@@ -759,12 +764,17 @@ function esEmpate(){
         }, 3000);
       }, 100);
     }
+    if (damasVerdesLenght === damasAmarillasLenght) {
+      setTimeout(() => {
+        swal('¡Felicitaciones han logrado un Empate!')
+      }, 100);
+    }
     guardarHistorial() 
     eventosALasDamas = false
     resetearTablero()
   }
 
-  if((ReyesAmarillosLength === 1 && ReyesVerdesLenght === 1  && damasAmarillasLenght === 0 && damasVerdesLenght === 0)){
+  if((ReyesAmarillosLength === 1 && ReyesVerdesLenght === 1  && damasAmarillasLenght === 0 && damasVerdesLenght === 0)){ //Si hay dos reinas, unicamente, en juego. Se genera un empate
     setTimeout(() => {
       swal('¡Felicitaciones han logrado un Empate!')
     }, 100);

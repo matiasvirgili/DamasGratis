@@ -121,10 +121,8 @@ function guardarHistorial(){
     var btnGuardarPartida = document.getElementById('guardar')
 }
 
-
 function ordenarPorFecha(){
-    if (contadorFecha === 0) {
-        
+    if (contadorFecha === 0) { //Se utiliza el contador para poner la fecha mas alta arriba o abajo
         arrayHistorial.sort(function(a, b){
             if(a[3] < b[3])return -1;
             if(a[3] > b[3])return 1;
@@ -143,12 +141,10 @@ function ordenarPorFecha(){
 }
 
 function ordenarPorPuntajeJugador1(){
-
-    if (contadorPuntaje1 === 0) {
-        
-        arrayHistorial.sort(function(a, b){
-            var primer = a[1].split('-')
-            var segundo = b[1].split('-')
+    if (contadorPuntaje1 === 0) { //Se utiliza el contador para poner el puntaje mas alto arriba o abajo
+            arrayHistorial.sort(function(a, b){
+            var primer = a[1].split('-') //obtengo el puntaje del jugador 1 en un historial
+            var segundo = b[1].split('-') //obtengo el puntaje del jugador 1 en otro historial
             var pun1 = primer[0]
             var pun2 = segundo[0]
             
@@ -158,7 +154,7 @@ function ordenarPorPuntajeJugador1(){
         })
         contadorPuntaje1++
     }else{     
-        arrayHistorial.sort(function(a, b){
+        arrayHistorial.sort(function(a, b){ //Se utiliza el contador para poner el puntaje mas alto arriba o abajo
             var primer = a[1].split('-')
             var segundo = b[1].split('-')
             var pun1 = primer[0]
@@ -174,12 +170,11 @@ function ordenarPorPuntajeJugador1(){
 }
 
 function ordenarPorPuntajeJugador2(){
-
-    if (contadorPuntaje2 === 0) {
+    if (contadorPuntaje2 === 0) { //Se utiliza el contador para poner el puntaje mas alto arriba o abajo
         
         arrayHistorial.sort(function(a, b){
-            var primer = a[1].split('-')
-            var segundo = b[1].split('-')
+            var primer = a[1].split('-') //obtengo el puntaje del jugador 2 en un historial
+            var segundo = b[1].split('-') //obtengo el puntaje del jugador 2 en otro historial
             var pun1 = primer[1]
             var pun2 = segundo[1]
             
@@ -189,11 +184,11 @@ function ordenarPorPuntajeJugador2(){
         })
         contadorPuntaje2++
     }else{     
-        arrayHistorial.sort(function(a, b){
+        arrayHistorial.sort(function(a, b){ //Se utiliza el contador para poner el puntaje mas alto arriba o abajo
             var primer = a[1].split('-')
             var segundo = b[1].split('-')
-            var pun1 = primer[0]
-            var pun2 = segundo[0]
+            var pun1 = primer[1]
+            var pun2 = segundo[1]
             
             if(pun1 > pun2) return 1
             if(pun1 < pun2) return -1
