@@ -115,8 +115,6 @@ main {
 		margin-left: 0vw;
 		margin-top: 2vh;
 	}
-
-	
 }
 
 /* Boton */
@@ -167,8 +165,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 5vw;
-    height: 5vw;
+    width: 4.2vw;
+    height: 4.2vw;
     background-color:#233D4D ;
 }
 
@@ -176,8 +174,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 5vw;
-    height: 5vw;
+    width: 4.2vw;
+    height: 4.2vw;
     background-color: #F2F2F2;
 }
 
@@ -252,7 +250,7 @@ main {
 	justify-content: space-around;
 	background-color: #233D4D ;
 	margin: 30px 0 0 0;
-	padding: 30px 0 30px 0;
+	padding: 25px 0;
 	overflow: hidden;
 	font-family: 'Poppins', sans-serif;
 }

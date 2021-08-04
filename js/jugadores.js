@@ -9,7 +9,8 @@ var inputJugador1 = document.getElementById('jugador-N1')
 var inputJugador2 = document.getElementById('jugador-N2')
 
 var numPartidasGuardadas = 0
-
+var borrarPartidas = document.getElementById('borrar-popup-partidas')
+var arrayPartidas = []
 
 btnNuevaPartida.addEventListener('click', (e)=>{
     e.preventDefault()
@@ -108,48 +109,80 @@ function guardarPartida() {
 
 
 var divContenedorPartidas = document.getElementById('cont-partidas-a-cargar')
+
 function mostrarPartidas(){
   divContenedorPartidas.innerHTML = ''
+  obtenerArrayPartidas()
 
-  var arrayPartidas = []
+  if(arrayPartidas.length>0){
+    for (let i = 0; i < arrayPartidas.length; i++) {
+
+        var divPartida = document.createElement('div')
+        var h2fechaPartida = document.createElement('h2')
+        var h2jugadoresPartida = document.createElement('h2')
+        h2fechaPartida.id = 'fechaPartida-L' + i
+        h2jugadoresPartida.id = 'jugadoresPartida-L' + i
+        divPartida.id = 'partida-L' + i
+        divPartida.classList = 'partida'
+
+        divContenedorPartidas.appendChild(divPartida)
+        divPartida.appendChild(h2fechaPartida)
+        divPartida.appendChild(h2jugadoresPartida)
+        
+        h2fechaPartida.innerHTML = arrayPartidas[i][0]
+        h2jugadoresPartida.innerHTML = arrayPartidas[i][1]
+
+        divPartida.addEventListener('click', (e)=>{
+          var cargaDatosPartida = JSON.parse(localStorage.getItem('Partida: ' + arrayPartidas[i][0]))
+          console.log('Partida:' + arrayPartidas[i][0]);
+          tableroArray = cargaDatosPartida[0]
+          turno =  cargaDatosPartida[1]
+          nombreJugador1.innerHTML = cargaDatosPartida[2]
+          nombreJugador2.innerHTML = cargaDatosPartida[3]
+
+          resetearTablero()
+          cerrarPoPUpPartidas()
+        })
+      }
+  }else{
+        var divPartida = document.createElement('div')
+        divContenedorPartidas.appendChild(divPartida)
+
+        var partidasInexistentes = document.createElement('h2')
+        partidasInexistentes.id = 'partidasInexistentes'
+        partidasInexistentes.innerHTML = "No se han encontrado partidas"
+        divPartida.appendChild(partidasInexistentes)
+  }
+ 
+}
+
+function obtenerArrayPartidas() {
+  arrayPartidas = []
   for (let i = 0; i < localStorage.length; i++) {
-    if (localStorage.key(i).indexOf('Partida:') >= 0){
-      var nombreJugadores = JSON.parse(localStorage.getItem('Partida: ' + localStorage.key(i).substring(9)))
-      arrayPartidas.push([localStorage.key(i).substring(9), nombreJugadores[2] + '-' + nombreJugadores[3]])
-    }
+  if (localStorage.key(i).indexOf('Partida:') >= 0){
+    var nombreJugadores = JSON.parse(localStorage.getItem('Partida: ' + localStorage.key(i).substring(9)))
+    arrayPartidas.push([localStorage.key(i).substring(9), nombreJugadores[2] + '-' + nombreJugadores[3]])
+  }
   }
   arrayPartidas.sort().reverse()
-  
-  
-  for (let i = 0; i < arrayPartidas.length; i++) {
-
-    var divPartida = document.createElement('div')
-    var h2fechaPartida = document.createElement('h2')
-    var h2jugadoresPartida = document.createElement('h2')
-    h2fechaPartida.id = 'fechaPartida-L' + i
-    h2jugadoresPartida.id = 'jugadoresPartida-L' + i
-    divPartida.id = 'partida-L' + i
-    divPartida.classList = 'partida'
-
-    divContenedorPartidas.appendChild(divPartida)
-    divPartida.appendChild(h2fechaPartida)
-    divPartida.appendChild(h2jugadoresPartida)
-    
-    h2fechaPartida.innerHTML = arrayPartidas[i][0]
-    h2jugadoresPartida.innerHTML = arrayPartidas[i][1]
-
-    divPartida.addEventListener('click', (e)=>{
-      var cargaDatosPartida = JSON.parse(localStorage.getItem('Partida: ' + arrayPartidas[i][0]))
-      console.log('Partida:' + arrayPartidas[i][0]);
-      tableroArray = cargaDatosPartida[0]
-      turno =  cargaDatosPartida[1]
-      nombreJugador1.innerHTML = cargaDatosPartida[2]
-      nombreJugador2.innerHTML = cargaDatosPartida[3]
-
-      resetearTablero()
-      cerrarPoPUpPartidas()
-    })
-  }
 }
+
+function limpiarPartidas(){
+  obtenerArrayPartidas()
+  var lengthLocalStorage = localStorage.length
+   for (let i = 0; i < lengthLocalStorage; i++) {
+      if (localStorage.getItem('Partida: ' + arrayPartidas[i][0])){
+      localStorage.removeItem('Partida: ' + arrayPartidas[i][0])
+      }
+  }
+  mostrarPartidas()
+}
+
+borrarPartidas.addEventListener('click', limpiarPartidas)
+
+
+
+
+
 
 

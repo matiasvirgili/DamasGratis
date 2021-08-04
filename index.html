@@ -8,10 +8,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Damas Gratis</title>
-	<link rel="stylesheet" href="../css/style.css">
-	<link rel="stylesheet" href="../css/cargar-partidas.css">
-	<link rel="stylesheet" href="../css/historial.css">
-	<link rel="stylesheet" href="../css/jugadores.css">
+	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="./css/cargar-partidas.css">
+	<link rel="stylesheet" href="./css/historial.css">
+	<link rel="stylesheet" href="./css/jugadores.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine" />
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
 </head>
@@ -32,7 +32,10 @@
 		<!--Historial de partidas-->
 		<div id="contenedor-historial" class="contenedor-historial">
 			<div id="popup-historial" class="popup-historial historial-cerrar">
-				<h2>Historial de partidas</h2>
+				<div>
+					<h2>Historial de partidas</h2>
+					<button id="borrar-historial" class="btn-h">Borrar</button>
+				</div>
 				<div class="descripcion">
 					<h3>Jugador</h3>
 					<h3>Puntos</h3>
@@ -77,6 +80,7 @@
 					<div class="partida"></div>
 				</div>
 				<div class="cont-btn">
+					<button id="borrar-popup-partidas" class="btn-c">Borrar Partidas</button>
 					<button id="cerrar-popup-partidas" class="btn-c">Cerrar</button>
 				</div>
 			</div>

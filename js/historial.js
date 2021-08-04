@@ -10,6 +10,7 @@ var ordenarPuntosJ2 = document.getElementById('ordenar-puntos-j2')
 var contadorFecha = 0
 var contadorPuntaje1 = 0
 var contadorPuntaje2 = 0
+var btnBorrarHistorial = document.getElementById('borrar-historial')
 
 
 
@@ -217,3 +218,16 @@ function recorrerHistorialParaArray(){
         }
     }
 }
+
+function limpiarHistorial(){
+    recorrerHistorialParaArray()
+    var lengthLocalStorage =  localStorage.length
+    for (let i = lengthLocalStorage; i >= 0; i--) {
+        if (localStorage.getItem('HistorialPartidas' + i)){
+        localStorage.removeItem('HistorialPartidas' + i)
+        }
+    }
+    crearHistorial()
+}
+
+btnBorrarHistorial.addEventListener('click',limpiarHistorial)

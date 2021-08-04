@@ -77,7 +77,7 @@ var tableroArray = [
 //   [null, null, null, null, null, null, null, null],
 //   ]
   
-//caso contrario al enterior
+// caso contrario al enterior
   // var tableroArray = [   
   //   [null, null, null, null, null, null, null, null],
   //   [null, null, null, null, null, null, null, null],
@@ -516,7 +516,6 @@ function moverFicha(filaMover, columnaMover, tipoMovimiento, aMoverFila, aMoverC
     MovimientosPermitidos.TurnoAnteriorComio = false
   }
 
-  actualizarPuntos()
   cambiarTurno()
   resetearTablero(filaMover, columnaMover)
 }
@@ -536,6 +535,7 @@ function resetearTablero(filaMover, columnaMover) {
     } else{
       resetearObjeto() //Reseteo del objeto que comprende todos los movimientos de la dama seleccionada
     }
+    actualizarPuntos()
     agregarEvento()
   }
 }

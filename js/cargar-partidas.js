@@ -4,7 +4,6 @@ var abrir = document.getElementById('cargar')
 var popupPartidas = document.getElementById('cargar-partidas')
 var contenedorPartidas = document.getElementById('cont-cargar-partidas')
 
-
 abrir.addEventListener('click', (e)=>{
     e.preventDefault()
     contenedorPartidas.style.opacity = '1'
