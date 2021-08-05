@@ -41,16 +41,16 @@ var MovimientosPermitidos = {
 // TABLERO
 
 //original
-// var tableroArray = [
-//     [null, null, null, null, null, null, null, null],
-//     [null, null, null, null, null, null, null, null],
-//     [null, null, null, null, null, null, null, null],
-//     [null, null, null, null, null, null, null, null],
-//     [null, null, null, null, null, null, null, null],
-//     [null, null, null, null, null, null, null, null],
-//     [null, null, null, null, null, null, null, null],
-//     [null, null, null, null, null, null, null, null],
-//   ]
+var tableroArray = [
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+  ]
 
 
 // //Tablero para verificar soplada de ficha
@@ -66,16 +66,16 @@ var MovimientosPermitidos = {
 // ]
 
 //Tablero para verificar movimientos de comer en todo sentido, de la dama comun
-var tableroArray = [   
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, 2, null, 2, null],
-  [null, null, null, null, null, 1, null, null],
-  [null, null, null, null, 2, null, 2, null],
-  [null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null],
-  ]
+// var tableroArray = [   
+//   [null, null, null, null, null, null, null, null],
+//   [null, null, null, null, null, null, null, null],
+//   [null, null, null, null, null, null, null, null],
+//   [null, null, null, null, 2, null, 2, null],
+//   [null, null, null, null, null, 1, null, null],
+//   [null, null, null, null, 2, null, 2, null],
+//   [null, null, null, null, null, null, null, null],
+//   [null, null, null, null, null, null, null, null],
+//   ]
   
 // caso contrario al enterior
   // var tableroArray = [   
@@ -276,11 +276,11 @@ function buscarEspaciosDisponibles(fila, columna, aMoverColumna, aMoverFila) {
   }
 
   if (turno === 1) { 
-    if (aMoverFila > 0 || damaSelec.esRey === false) { //Si el movimiento de fila sigue el sentido de la dama comun o no es rey
-      damaSelec.movFilaComerPintado = damaSelec.idFila + aMoverFila + 1
+    if (aMoverFila > 0 || damaSelec.esRey === false) { 
+      damaSelec.movFilaComerPintado = damaSelec.idFila + aMoverFila + 1  //Si el movimiento de fila sigue el sentido de la dama comun o no es rey
     }
-    else{                                             //Si el movimiento de fila sigue el sentido inverso de la dama comun y es rey
-      damaSelec.movFilaComerPintado = damaSelec.idFila + aMoverFila - 1
+    else{                                            
+      damaSelec.movFilaComerPintado = damaSelec.idFila + aMoverFila - 1  //Si el movimiento de fila sigue el sentido inverso de la dama comun y es rey
     }
   }else {
       if (aMoverFila > 0 || damaSelec.esRey === false) {
@@ -290,7 +290,7 @@ function buscarEspaciosDisponibles(fila, columna, aMoverColumna, aMoverFila) {
         damaSelec.movFilaComerPintado = damaSelec.idFila + (-(aMoverFila)) + 1 //Si el movimiento de fila sigue el sentido inverso de la dama comun y es rey
       }
   }
-  comprobarComer(aMoverFila, aMoverColumna)
+  comprobarComer(aMoverFila, aMoverColumna) //dudaaa
 
   if (tableroArray[damaSelec.idFila][damaSelec.idColumna] === 11 || tableroArray[damaSelec.idFila][damaSelec.idColumna] === 22) {
     damaSelec.esRey = true
