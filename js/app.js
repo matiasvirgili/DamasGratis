@@ -1,8 +1,8 @@
 // VARIABLES GLOBALES
 
 var turno = 2
-var fichasAmarillas = document.getElementsByClassName('damasAmarillas')
-var fichasVerdes = document.getElementsByClassName('damasVerdes')
+var fichasBlancas = document.getElementsByClassName('damasBlancas')
+var fichasRojas = document.getElementsByClassName('damasRojas')
 var jugador1 = document.getElementById('jugador1')
 var jugador2 = document.getElementById('jugador2')
 var nombreJugador1 = document.getElementById('nombreJugador1')
@@ -153,22 +153,22 @@ function crearDamas() {
 
       if (tableroArray[i][k] === 1) {
         var NewDama = document.createElement('div')
-        NewDama.className = 'damasAmarillas'
+        NewDama.className = 'damasBlancas'
         DivCelda.appendChild(NewDama)
       }  
       if (tableroArray[i][k] === 2) {
         var NewDama = document.createElement('div')
-        NewDama.className = 'damasVerdes'
+        NewDama.className = 'damasRojas'
         DivCelda.appendChild(NewDama)
       }
       if (tableroArray[i][k] === 11) {
         var NewDama = document.createElement('div')
-        NewDama.className = 'damasAmarillas rey'
+        NewDama.className = 'damasBlancas rey'
         DivCelda.appendChild(NewDama)
       }  
       if (tableroArray[i][k] === 22) {
         var NewDama = document.createElement('div')
-        NewDama.className = 'damasVerdes rey'
+        NewDama.className = 'damasRojas rey'
         DivCelda.appendChild(NewDama)
       }
     }
@@ -178,12 +178,12 @@ function crearDamas() {
 function agregarEvento() {  //Agrega los eventos clicks a las damas del turno activo
   if (eventosALasDamas === true) {
     if (turno === 1) {
-      for (var i = 0; i < fichasAmarillas.length; i++) {
-        fichasAmarillas[i].addEventListener('click', obtenerFichaSeleccionada)
+      for (var i = 0; i < fichasBlancas.length; i++) {
+        fichasBlancas[i].addEventListener('click', obtenerFichaSeleccionada)
       }
     } else {
-      for (var i = 0; i < fichasVerdes.length; i++) {
-        fichasVerdes[i].addEventListener('click', obtenerFichaSeleccionada)
+      for (var i = 0; i < fichasRojas.length; i++) {
+        fichasRojas[i].addEventListener('click', obtenerFichaSeleccionada)
       }
   }
   }
@@ -290,21 +290,21 @@ function buscarEspaciosDisponibles(fila, columna, aMoverColumna, aMoverFila) {
         damaSelec.movFilaComerPintado = damaSelec.idFila + (-(aMoverFila)) + 1 //Si el movimiento de fila sigue el sentido inverso de la dama comun y es rey
       }
   }
-  comprobarComer(aMoverFila, aMoverColumna) //dudaaa
+  comprobarComer(aMoverFila, aMoverColumna) //Comprueba comer en sentido comun
 
   if (tableroArray[damaSelec.idFila][damaSelec.idColumna] === 11 || tableroArray[damaSelec.idFila][damaSelec.idColumna] === 22) {
     damaSelec.esRey = true
   }
-  if (damaSelec.esRey === false) {
+  if (damaSelec.esRey === false) {  
     resetearObjeto(); //se resetean los valores de comer izquierda o derecha
-    if (turno === 1) { //Comprobar comer para abajo
+    if (turno === 1) { 
       damaSelec.movFilaComerPintado = damaSelec.idFila - aMoverFila - 1
       damaSelec.movFilaPintar = damaSelec.idFila - aMoverFila
     } else{
       damaSelec.movFilaComerPintado = damaSelec.idFila + aMoverFila + 1 
       damaSelec.movFilaPintar = damaSelec.idFila + aMoverFila
     }
-    comprobarComer(aMoverFila, aMoverColumna)
+    comprobarComer(aMoverFila, aMoverColumna) //Comprueba comer en sentido contrario al turno, siendo una ficha comun
   }
 }
 
@@ -336,17 +336,17 @@ function comprobarComer(aMoverFila, aMoverColumna) {
           var divPintar = document.getElementById('fila-' + damaSelec.movFilaComerPintado +'-col-' +damaSelec.movComerDerPintado)
           divPintar.style.backgroundColor = '#79D0F2'
           
-          if (aMoverFila > 0) { //Se utiliza para dejar de hacer la logica de comer cuando esta ya encuentra una ficha para comer
-            if (turno === 1) { //verificamos que lado es el que se encontro la ficha de comer
-              MovimientosPermitidos.SeguirMovComerDerAbajo = false;  // se utiliza para terminar la verificacion del comprobar comer hacia la derecha
+          if (aMoverFila > 0) { // si la fila a mover es mayor a 0
+            if (turno === 1) { //si es turno 1, el amoverFila se le suma al id por lo que el comerDer es sentido normal(para abajo)
+              MovimientosPermitidos.SeguirMovComerDerAbajo = false // se utiliza para terminar la verificacion del comprobar comer hacia la derecha
             } else{
-              MovimientosPermitidos.SeguirMovComerDerArriba = false; 
+              MovimientosPermitidos.SeguirMovComerDerArriba = false
             }
           } else{
             if (turno === 1) {
-              MovimientosPermitidos.SeguirMovComerDerArriba = false; 
+              MovimientosPermitidos.SeguirMovComerDerArriba = false 
             } else{
-                MovimientosPermitidos.SeguirMovComerDerAbajo = false; 
+                MovimientosPermitidos.SeguirMovComerDerAbajo = false
             }
           }
         } else{
@@ -371,15 +371,15 @@ function comprobarComer(aMoverFila, aMoverColumna) {
 
           if (aMoverFila > 0) {
             if (turno === 1) {
-            MovimientosPermitidos.SeguirMovComerIzqAbajo = false; 
+            MovimientosPermitidos.SeguirMovComerIzqAbajo = false
             } else{
-              MovimientosPermitidos.SeguirMovComerIzqArriba = false; 
+              MovimientosPermitidos.SeguirMovComerIzqArriba = false
             }
           } else{
             if (turno === 1) {
-              MovimientosPermitidos.SeguirMovComerIzqArriba = false; 
+              MovimientosPermitidos.SeguirMovComerIzqArriba = false
             } else{
-                MovimientosPermitidos.SeguirMovComerIzqAbajo = false; 
+                MovimientosPermitidos.SeguirMovComerIzqAbajo = false
             }
           }
         } else{
@@ -452,14 +452,14 @@ function moverFicha(filaMover, columnaMover, tipoMovimiento, aMoverFila, aMoverC
     var newDama = document.createElement('div') //creo la dama nueva 
     
     if (turno === 1) {
-      newDama.className = 'damasAmarillas'
+      newDama.className = 'damasBlancas'
       if (tableroArray[damaSelec.idFila][damaSelec.idColumna] === 11) { //Si la dama es rey, va a tener 11 el tablero
         tableroArray[filaMover][columnaMover] = 11; 
       }else{
         tableroArray[filaMover][columnaMover] = 1; //Si la dama es comun tiene un 1
       }
     } else {
-      newDama.className = 'damasVerdes'
+      newDama.className = 'damasRojas'
       if (tableroArray[damaSelec.idFila][damaSelec.idColumna] === 22) { //Si la dama es rey, va a tener 22 en el tablero
         tableroArray[filaMover][columnaMover] = 22;
       }else{
@@ -467,7 +467,7 @@ function moverFicha(filaMover, columnaMover, tipoMovimiento, aMoverFila, aMoverC
       }
     }
     
-    if ((filaMover === 0 && turno === 2)|| (filaMover === 7 && turno === 1)) { //Si la dama llega al final del tablero se tiene que convertir en rey
+    if ((filaMover === 0 && turno === 2) || (filaMover === 7 && turno === 1)) { //Si la dama llega al final del tablero se tiene que convertir en rey
       if (damaSelec.esRey === false) {
         newDama.classList.add('rey') //Una vez que llego a cualquiera de las dos filas (0 o 7) se le asigna la clase rey
         if (turno === 1) {
@@ -543,17 +543,17 @@ function resetearTablero(filaMover, columnaMover) {
 }
 
 function actualizarPuntos() {
-  parrafoPuntosJugador1.innerHTML = 13 - fichasVerdes.length
-  parrafoPuntosJugador2.innerHTML = 13 - fichasAmarillas.length
+  parrafoPuntosJugador1.innerHTML = 13 - fichasRojas.length
+  parrafoPuntosJugador2.innerHTML = 13 - fichasBlancas.length
   
-  if (fichasVerdes.length === 1) {
+  if (fichasRojas.length === 1) {
     setTimeout(()=>{
       swal('¡Felicitaciones ' + nombreJugador1.innerHTML + ' ganaste la partida!')
     },100)
     eventosALasDamas = false
     guardarHistorial()
   }	
-  if (fichasAmarillas.length === 1) {
+  if (fichasBlancas.length === 1) {
     setTimeout(()=>{
       swal('¡Felicitaciones ' + nombreJugador2.innerHTML + ' ganaste la partida!')
     },100)
@@ -597,7 +597,7 @@ function resetearObjeto() {
 }
  
 function resetearObjMovPermitidos(BusquedaAnteriores){ 
-  //La busquedaAnterior va a ser 1 si es una ficha comun o si ya paso el turno, y -1 si la dama clickeada es reina (para buscar los datos inversos sin eliminar los datos de las casillas de abajo)
+  //La busquedaAnterior va a ser 1 si es una ficha comun o si ya paso el turno, y -1 si la dama clickeada es reina (para buscar los datos inversos sin eliminar los datos de las casillas inversa del sentido comun del turno)
   MovimientosPermitidos.SeguirMovDer = true
   MovimientosPermitidos.SeguirMovIzq = true
   if (BusquedaAnteriores === 1) {
@@ -611,7 +611,7 @@ function resetearObjMovPermitidos(BusquedaAnteriores){
 
 function esEmpate(){
   var arribaDer = false, arribaIzq = false, abajoIzq = false, abajoDer = false
-  var ReyesAmarillosLength = 0, ReyesVerdesLenght = 0, damasAmarillasLenght = 0, damasVerdesLenght = 0
+  var ReyesBlancosLength = 0, ReyesRojasLenght = 0, damasBlancasLenght = 0, damasRojasLenght = 0
   var fichaEnemiga = 0, fichaEnemigaRey = 0, contadorTrues = 0
   var arrayEmpate = []
 
@@ -628,16 +628,16 @@ function esEmpate(){
       arribaDer = false, arribaIzq = false, abajoDer = false, arribaIzq = false //Reseteamos las variables
 
       if (tableroArray[i][k] === 11) { //Contamos la cantidad de reyes que hay
-        ReyesAmarillosLength++
+        ReyesBlancosLength++
       }
       if (tableroArray[i][k] === 22) {
-        ReyesVerdesLenght++
+        ReyesRojasLenght++
       }
       if (tableroArray[i][k] === 1) { //Contamos la cantidad de damas comunes que hay
-        damasAmarillasLenght++
+        damasBlancasLenght++
       }
       if (tableroArray[i][k] === 2) {
-        damasVerdesLenght++
+        damasRojasLenght++
       }
 
       if (tableroArray[i][k] === turno || tableroArray[i][k] === (turno*11)) { //Verificamos que en esa casilla haya una dama comun o rey del turno actual     
@@ -748,7 +748,7 @@ function esEmpate(){
     //verificamos si el contador de true es mayor a 0 y que el contador de true sea igual a la longitud del array empate, es decir, que en todas sus fichas no se pueda generar ningun movimiento
     //Verificamos que jugador tiene mas fichas a la hora de quedarse sin movimientos, y este gana la partida
     //Si tienen la misma cantidad de fichas, se genera un empate
-    if (damasAmarillasLenght > damasVerdesLenght) {
+    if (damasBlancasLenght > damasRojasLenght) {
       setTimeout(() => {
         swal('¡Felicitaciones ' + nombreJugador1.innerHTML + ' ganaste la partida!')
         setTimeout(() => {
@@ -756,7 +756,7 @@ function esEmpate(){
         }, 3000);
       }, 100);
     }
-    if (damasVerdesLenght > damasAmarillasLenght) {
+    if (damasRojasLenght > damasBlancasLenght) {
       setTimeout(() => {
         swal('¡Felicitaciones ' + nombreJugador2.innerHTML + ' ganaste la partida!')
         setTimeout(() => {
@@ -764,7 +764,7 @@ function esEmpate(){
         }, 3000);
       }, 100);
     }
-    if (damasVerdesLenght === damasAmarillasLenght) {
+    if (damasRojasLenght === damasBlancasLenght) {
       setTimeout(() => {
         swal('¡Felicitaciones han logrado un Empate!')
       }, 100);
@@ -774,7 +774,7 @@ function esEmpate(){
     resetearTablero()
   }
 
-  if((ReyesAmarillosLength === 1 && ReyesVerdesLenght === 1  && damasAmarillasLenght === 0 && damasVerdesLenght === 0)){ //Si hay dos reinas, unicamente, en juego. Se genera un empate
+  if((ReyesBlancosLength === 1 && ReyesRojasLenght === 1  && damasBlancasLenght === 0 && damasRojasLenght === 0)){ //Si hay dos reinas, unicamente, en juego. Se genera un empate
     setTimeout(() => {
       swal('¡Felicitaciones han logrado un Empate!')
     }, 100);

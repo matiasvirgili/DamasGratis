@@ -179,7 +179,7 @@ main {
     background-color: #F2F2F2;
 }
 
-.damasAmarillas{
+.damasBlancas{
     width: 70%;
     height: 70%;
 	border: 1px solid #F2F2F2;
@@ -188,7 +188,7 @@ main {
     cursor: pointer;
 }
 
-.damasVerdes{
+.damasRojas{
     width: 70%;
     height: 70%;
     border-radius: 50%;
