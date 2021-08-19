@@ -17,13 +17,14 @@ function validaciones(){
                 return
             }
         }else{
-            alert('Mail inexistente')
+            alert('El mensaje debe contener entre 3 y 200 caracteres.')
             return
         }
     }else{
-        alert('El mensaje debe contener entre 3 y 200 caracteres.')
+        alert('Mail inexistente')
         return
     }
+
 }
 
 function envioDeMail(){

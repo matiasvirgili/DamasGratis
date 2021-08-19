@@ -258,17 +258,16 @@ function buscarEspaciosDisponibles(fila, columna, aMoverColumna, aMoverFila) {
     if (MovimientosPermitidos.SeguirMovIzq === true) { //Si la dama no se encontro con ninguna obstruccion anteriormente
       if (damaSelec.movPintarIzq >= 0 && damaSelec.movFilaPintar >= 0  && damaSelec.movFilaPintar <= 7) { //Validamos que los movimientos no excedan el tablero
         if (tableroArray[damaSelec.movFilaPintar][damaSelec.movPintarIzq] === null) { //Verificamos que el espacio de la derecha a mover sea nulo
-  
+
             damaSelec.movIzq = true
   
             var divPintar = document.getElementById('fila-' + damaSelec.movFilaPintar +'-col-' + damaSelec.movPintarIzq)
             divPintar.style.backgroundColor = '#79D0F2'
-  
         }
         else{
-            MovimientosPermitidos.SeguirMovIzq = false //Si se encuentra con una dama, esta dejara 
-            damaSelec.movIzq = false //Si se encuentra con una obstruccion, no se le asignara el evento a la derecha en AgregarClicksPosibles()
-          }
+          MovimientosPermitidos.SeguirMovIzq = false //Si se encuentra con una dama, esta dejara 
+          damaSelec.movIzq = false //Si se encuentra con una obstruccion, no se le asignara el evento a la derecha en AgregarClicksPosibles()
+        }
       } else{
         damaSelec.movIzq = false //Si se excede del tablero, no se le asignara el evento a la derecha en AgregarClicksPosibles()
       }
@@ -329,10 +328,8 @@ function comprobarComer(aMoverFila, aMoverColumna) {
 
         if ((tableroArray[damaSelec.movFilaPintar][damaSelec.movPintarDer] === damaEnemiga || tableroArray[damaSelec.movFilaPintar][damaSelec.movPintarDer] === damaEnemigaRey) && tableroArray[damaSelec.movFilaComerPintado][damaSelec.movComerDerPintado] === null) {
           //Verificamos que la dama a la derecha tenga una dama enemiga (comun o rey) y el espacio siguiente sea nulo
-          
           damaSelec.movComerDer = true
           MovimientosPermitidos.SeguirMovDer = false //Si esta permitido comer, ya no se seguira movimiento a la derecha
-          
           var divPintar = document.getElementById('fila-' + damaSelec.movFilaComerPintado +'-col-' +damaSelec.movComerDerPintado)
           divPintar.style.backgroundColor = '#79D0F2'
           
